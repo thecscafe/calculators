@@ -41,12 +41,12 @@
 
 <div class="container">
     <h2>Customer Lifetime Value (CLV) Calculator</h2>
-    <label for="acquisitionCost">CAC | Customer Acquisition Cost ($): (ex. 500)</label>
-    <input type="number" id="acquisitionCost" placeholder="Enter CAC"><br>
-    <label for="retentionRate">Retention Rate (%): (ex. 80)</label>
-    <input type="number" id="retentionRate" placeholder="Enter retention rate"><br>
-    <label for="averageRevenue">Average Revenue per Customer ($): (ex. 1000)</label>
+    <label for="acquisitionCost">Acquisition Cost: (ex. $200)</label>
+    <input type="number" id="acquisitionCost" placeholder="Enter acquisition cost"><br>
+    <label for="averageRevenue">Average Revenue per Customer: (ex. $1000)</label>
     <input type="number" id="averageRevenue" placeholder="Enter average revenue per customer"><br>
+    <label for="averageLifespan">Average Customer Lifespan (months): (ex. 24)</label>
+    <input type="number" id="averageLifespan" placeholder="Enter average customer lifespan"><br>
     <button onclick="calculateCLV()">Calculate CLV</button>
     <div id="result"></div>
 </div>
@@ -54,12 +54,12 @@
 <script>
     function calculateCLV() {
         var acquisitionCost = parseFloat(document.getElementById('acquisitionCost').value);
-        var retentionRate = parseFloat(document.getElementById('retentionRate').value) / 100; // Convert to decimal
         var averageRevenue = parseFloat(document.getElementById('averageRevenue').value);
+        var averageLifespan = parseInt(document.getElementById('averageLifespan').value);
 
-        var clv = (averageRevenue * (1 - retentionRate)) / retentionRate - acquisitionCost;
+        var clv = (averageRevenue * averageLifespan) - acquisitionCost;
 
-        document.getElementById('result').innerHTML = "<h3>Customer Lifetime Value (CLV) = (Average Revenue per Customer * (1 - Retention Rate)) / Retention Rate - Acquisition Cost</h3>" +
+        document.getElementById('result').innerHTML = "<h3>Customer Lifetime Value (CLV) = (Average Revenue per Customer * Average Customer Lifespan) - Average Acquisition Cost per Customer</h3>" +
             "<p>The estimated CLV is: $" + clv.toFixed(2) + "</p>";
     }
 </script>
