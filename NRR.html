@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KPI Calculator</title>
+<title>Net Revenue Retention Calculator</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -40,35 +40,27 @@
 <body>
 
 <div class="container">
-    <h2>KPI Calculator</h2>
-    <label for="renewalRevenue">Renewal Revenue:</label>
-    <input type="number" id="renewalRevenue" placeholder="Enter renewal revenue"><br>
-    <label for="expansionRevenue">Expansion Revenue:</label>
+    <h2>Net Revenue Retention Calculator</h2>
+    <label for="startingRevenue">Starting Revenue ($):</label>
+    <input type="number" id="startingRevenue" placeholder="Enter starting revenue"><br>
+    <label for="expansionRevenue">Expansion Revenue ($):</label>
     <input type="number" id="expansionRevenue" placeholder="Enter expansion revenue"><br>
-    <label for="forecastedRevenue">Forecasted Renewal Revenue:</label>
-    <input type="number" id="forecastedRevenue" placeholder="Enter forecasted renewal revenue"><br>
-    <label for="startingCustomers">Starting Customers:</label>
-    <input type="number" id="startingCustomers" placeholder="Enter starting customers"><br>
-    <label for="endingCustomers">Ending Customers:</label>
-    <input type="number" id="endingCustomers" placeholder="Enter ending customers"><br>
+    <label for="churnedRevenue">Churned Revenue ($):</label>
+    <input type="number" id="churnedRevenue" placeholder="Enter churned revenue"><br>
     <button onclick="calculate()">Calculate</button>
     <div id="result"></div>
 </div>
 
 <script>
     function calculate() {
-        var renewalRevenue = parseFloat(document.getElementById('renewalRevenue').value);
+        var startingRevenue = parseFloat(document.getElementById('startingRevenue').value);
         var expansionRevenue = parseFloat(document.getElementById('expansionRevenue').value);
-        var forecastedRevenue = parseFloat(document.getElementById('forecastedRevenue').value);
-        var startingCustomers = parseInt(document.getElementById('startingCustomers').value);
-        var endingCustomers = parseInt(document.getElementById('endingCustomers').value);
+        var churnedRevenue = parseFloat(document.getElementById('churnedRevenue').value);
 
-        var nrr = ((renewalRevenue + expansionRevenue - forecastedRevenue) / startingCustomers) * 100;
-        var churnRate = ((startingCustomers - endingCustomers) / startingCustomers) * 100;
+        var netRevenueRetention = ((startingRevenue + expansionRevenue - churnedRevenue) / startingRevenue) * 100;
 
-        document.getElementById('result').innerHTML = "<h3>Results</h3>" +
-            "<p>Net Renewal Rate (NRR): " + nrr.toFixed(2) + "%</p>" +
-            "<p>Churn Rate: " + churnRate.toFixed(2) + "%</p>";
+        document.getElementById('result').innerHTML = "<h3>Net Revenue Retention</h3>" +
+            "<p>Net Revenue Retention Rate: " + netRevenueRetention.toFixed(2) + "%</p>";
     }
 </script>
 
