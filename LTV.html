@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LTV Calculator</title>
+<title>CLV Calculator</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -40,12 +40,12 @@
 <body>
 
 <div class="container">
-    <h2>Customer Lifetime Value (LTV or CLV) Calculator</h2>
-    <label for="acquisitionCost">Acquisition Cost: (ex. $500)</label>
+    <h2>Customer Lifetime Value (CLV) Calculator</h2>
+    <label for="acquisitionCost">Acquisition Cost ($): (ex. 500)</label>
     <input type="number" id="acquisitionCost" placeholder="Enter acquisition cost"><br>
-    <label for="retentionRate">Retention Rate (%): (ex. 80% (0.80))</label>
+    <label for="retentionRate">Retention Rate (%): (ex. 80)</label>
     <input type="number" id="retentionRate" placeholder="Enter retention rate"><br>
-    <label for="averageRevenue">Average Revenue per Customer: (ex. $1000)</label>
+    <label for="averageRevenue">Average Revenue per Customer ($): (ex. 1000)</label>
     <input type="number" id="averageRevenue" placeholder="Enter average revenue per customer"><br>
     <button onclick="calculateCLV()">Calculate CLV</button>
     <div id="result"></div>
