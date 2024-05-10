@@ -78,18 +78,37 @@
         <p>Start making informed decisions today!</p>
     </div>
 
-    <script>
-        function loadCalculator(calculatorUrl) {
+   <script>
+    function loadCalculator(calculatorUrl) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById('calculatorContainer').innerHTML = this.responseText;
+                document.getElementById('calculatorContainer').style.display = 'block';
+                initializeCalculator();
+            }
+        };
+        xhttp.open("GET", calculatorUrl, true);
+        xhttp.send();
+    }
+
+    function initializeCalculator() {
+        var calculatorForm = document.querySelector('.calculator-content form');
+        calculatorForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+            var formData = new FormData(calculatorForm);
+            var formAction = calculatorForm.getAttribute('action');
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById('calculatorContainer').innerHTML = this.responseText;
-                    document.getElementById('calculatorContainer').style.display = 'block';
+                    document.getElementById('result').innerHTML = this.responseText;
                 }
             };
-            xhttp.open("GET", calculatorUrl, true);
-            xhttp.send();
-        }
-    </script>
+            xhttp.open("POST", formAction, true);
+            xhttp.send(formData);
+        });
+    }
+</script>
+
 </body>
 </html>
