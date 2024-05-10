@@ -71,44 +71,44 @@
         <p>Choose from our suite of powerful calculators to optimize your business strategies:</p>
         <ul>
             <li><a href="#" onclick="loadCalculator('CAC.html')">Customer Acquisition Cost Calculator</a></li>
-            <li><a href="#" onclick="loadCalculator('LTV.html')">Lifetime Value Calculator</a></li>
+            <li><a href="#" onclick="loadCalculator('LTV.html')">Customer Lifetime Value Calculator</a></li>
             <li><a href="#" onclick="loadCalculator('NRR.html')">Net Revenue Retention Calculator</a></li>
         </ul>
         <div id="calculatorContainer" class="calculator-content"></div>
         <p>Start making informed decisions today!</p>
     </div>
 
-   <script>
-    function loadCalculator(calculatorUrl) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById('calculatorContainer').innerHTML = this.responseText;
-                document.getElementById('calculatorContainer').style.display = 'block';
-                initializeCalculator();
-            }
-        };
-        xhttp.open("GET", calculatorUrl, true);
-        xhttp.send();
-    }
-
-    function initializeCalculator() {
-        var calculatorForm = document.querySelector('.calculator-content form');
-        calculatorForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the form from submitting
-            var formData = new FormData(calculatorForm);
-            var formAction = calculatorForm.getAttribute('action');
+    <script>
+        function loadCalculator(calculatorUrl) {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById('result').innerHTML = this.responseText;
+                    document.getElementById('calculatorContainer').innerHTML = this.responseText;
+                    document.getElementById('calculatorContainer').style.display = 'block';
+                    initializeCalculator();
                 }
             };
-            xhttp.open("POST", formAction, true);
-            xhttp.send(formData);
-        });
-    }
-</script>
+            xhttp.open("GET", calculatorUrl, true);
+            xhttp.send();
+        }
+
+        function initializeCalculator() {
+            var calculatorForm = document.querySelector('.calculator-content form');
+            calculatorForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the form from submitting
+                var formData = new FormData(calculatorForm);
+                var formAction = calculatorForm.getAttribute('action');
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById('result').innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("POST", formAction, true);
+                xhttp.send(formData);
+            });
+        }
+    </script>
 
 </body>
 </html>
