@@ -5,8 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Business Calculator Suite</title>
     <style>
-        /* CSS styles remain the same */
-        /* ... */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        h1 {
+            font-size: 36px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        li button {
+            display: block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        li button:hover {
+            background-color: #0056b3;
+        }
+        .calculator-content {
+            display: none;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -22,31 +76,29 @@
             <li><button id="ltvBtn">Lifetime Value Calculator</button></li>
             <li><button id="nrrBtn">Net Revenue Retention Calculator</button></li>
         </ul>
-        <div id="cacCalculator" style="display: none;"></div>
-        <div id="ltvCalculator" style="display: none;"></div>
-        <div id="nrrCalculator" style="display: none;"></div>
+        <div id="calculatorContainer" class="calculator-content"></div>
         <p>Start making informed decisions today!</p>
     </div>
 
     <script>
         document.getElementById('cacBtn').addEventListener('click', function() {
-            loadCalculator('CAC.html', 'cacCalculator');
+            loadCalculator('CAC.html');
         });
 
         document.getElementById('ltvBtn').addEventListener('click', function() {
-            loadCalculator('LTV.html', 'ltvCalculator');
+            loadCalculator('LTV.html');
         });
 
         document.getElementById('nrrBtn').addEventListener('click', function() {
-            loadCalculator('NRR.html', 'nrrCalculator');
+            loadCalculator('NRR.html');
         });
 
-        function loadCalculator(calculatorUrl, targetDivId) {
+        function loadCalculator(calculatorUrl) {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById(targetDivId).innerHTML = this.responseText;
-                    document.getElementById(targetDivId).style.display = 'block';
+                    document.getElementById('calculatorContainer').innerHTML = this.responseText;
+                    document.getElementById('calculatorContainer').style.display = 'block';
                 }
             };
             xhttp.open("GET", calculatorUrl, true);
