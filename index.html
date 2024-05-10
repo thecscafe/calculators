@@ -81,18 +81,22 @@
     </div>
 
     <script>
+        // Load CAC.html content when CAC button is clicked
         document.getElementById('cacBtn').addEventListener('click', function() {
             loadCalculator('CAC.html');
         });
 
+        // Load LTV.html content when LTV button is clicked
         document.getElementById('ltvBtn').addEventListener('click', function() {
             loadCalculator('LTV.html');
         });
 
+        // Load NRR.html content when NRR button is clicked
         document.getElementById('nrrBtn').addEventListener('click', function() {
             loadCalculator('NRR.html');
         });
 
+        // Function to load calculator content
         function loadCalculator(calculatorUrl) {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
