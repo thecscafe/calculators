@@ -76,7 +76,7 @@
             <li><button id="ltvBtn">Lifetime Value Calculator</button></li>
             <li><button id="nrrBtn">Net Revenue Retention Calculator</button></li>
         </ul>
-        <div id="calculatorContainer" class="calculator-content"></div>
+        <div id="calculatorContainer"></div>
         <p>Start making informed decisions today!</p>
     </div>
 
@@ -98,7 +98,6 @@
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     document.getElementById('calculatorContainer').innerHTML = this.responseText;
-                    document.getElementById('calculatorContainer').style.display = 'block';
                 }
             };
             xhttp.open("GET", calculatorUrl, true);
