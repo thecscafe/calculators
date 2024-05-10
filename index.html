@@ -22,28 +22,31 @@
             <li><button id="ltvBtn">Lifetime Value Calculator</button></li>
             <li><button id="nrrBtn">Net Revenue Retention Calculator</button></li>
         </ul>
-        <div id="calculatorContainer"></div>
+        <div id="cacCalculator" style="display: none;"></div>
+        <div id="ltvCalculator" style="display: none;"></div>
+        <div id="nrrCalculator" style="display: none;"></div>
         <p>Start making informed decisions today!</p>
     </div>
 
     <script>
         document.getElementById('cacBtn').addEventListener('click', function() {
-            loadCalculator('CAC.html');
+            loadCalculator('CAC.html', 'cacCalculator');
         });
 
         document.getElementById('ltvBtn').addEventListener('click', function() {
-            loadCalculator('LTV.html');
+            loadCalculator('LTV.html', 'ltvCalculator');
         });
 
         document.getElementById('nrrBtn').addEventListener('click', function() {
-            loadCalculator('NRR.html');
+            loadCalculator('NRR.html', 'nrrCalculator');
         });
 
-        function loadCalculator(calculatorUrl) {
+        function loadCalculator(calculatorUrl, targetDivId) {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById('calculatorContainer').innerHTML = this.responseText;
+                    document.getElementById(targetDivId).innerHTML = this.responseText;
+                    document.getElementById(targetDivId).style.display = 'block';
                 }
             };
             xhttp.open("GET", calculatorUrl, true);
