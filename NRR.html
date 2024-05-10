@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Net Revenue Retention Calculator - Calculate Your NRR</title>
-    <meta name="description" content="Use our Net Revenue Retention Calculator to determine the percentage of revenue retained from existing customers after accounting for expansions and churn. Input your starting revenue, expansion revenue, and churned revenue to calculate your Net Revenue Retention Rate.">
+    <meta name="description" content="Calculate the percentage of revenue retained from existing customers after accounting for expansions and churn using our Net Revenue Retention Calculator. Input your starting revenue, expansion revenue, and churned revenue to calculate your Net Revenue Retention Rate.">
     <meta name="keywords" content="net revenue retention calculator, nrr calculator, calculate nrr, starting revenue, expansion revenue, churned revenue, customer retention, business metrics">
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
         }
         .container {
-            max-width: 400px;
-            margin: 0 auto;
+            max-width: 800px;
+            margin: 20px auto;
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -42,14 +45,17 @@
 <body>
 
 <div class="container">
-    <h2>Net Revenue Retention Calculator</h2>
-    <label for="startingRevenue">Starting Revenue ($): (ex. 10,000)</label>
-    <input type="number" id="startingRevenue" placeholder="Enter starting revenue"><br>
-    <label for="expansionRevenue">Expansion Revenue ($): (2,000)</label>
-    <input type="number" id="expansionRevenue" placeholder="Enter expansion revenue"><br>
-    <label for="churnedRevenue">Churned Revenue ($): (ex. 1,500)</label>
-    <input type="number" id="churnedRevenue" placeholder="Enter churned revenue"><br>
-    <button onclick="calculate()">Calculate</button>
+    <h1>Net Revenue Retention Calculator</h1>
+    <p>Calculate the percentage of revenue retained from existing customers after accounting for expansions and churn using our Net Revenue Retention Calculator. Input your starting revenue, expansion revenue, and churned revenue to calculate your Net Revenue Retention Rate.</p>
+    <form>
+        <label for="startingRevenue">Starting Revenue ($): (ex. 10,000)</label>
+        <input type="number" id="startingRevenue" placeholder="Enter starting revenue" required><br>
+        <label for="expansionRevenue">Expansion Revenue ($): (2,000)</label>
+        <input type="number" id="expansionRevenue" placeholder="Enter expansion revenue" required><br>
+        <label for="churnedRevenue">Churned Revenue ($): (ex. 1,500)</label>
+        <input type="number" id="churnedRevenue" placeholder="Enter churned revenue" required><br>
+        <button type="button" onclick="calculate()">Calculate</button>
+    </form>
     <div id="result"></div>
 </div>
 
@@ -61,7 +67,7 @@
 
         var netRevenueRetention = ((startingRevenue + expansionRevenue - churnedRevenue) / startingRevenue) * 100;
 
-        document.getElementById('result').innerHTML = "<h3>Net Revenue Retention = ((Starting Revenue + Expansion Revenue - Churned Revenue) / Starting Revenue) * 100</h3>" +
+        document.getElementById('result').innerHTML = "<h2>Result</h2>" +
             "<p>Net Revenue Retention Rate: " + netRevenueRetention.toFixed(2) + "%</p>";
     }
 </script>
