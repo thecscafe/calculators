@@ -35,7 +35,7 @@
         ul {
             list-style-type: none;
             padding: 0;
-            text-align: center; /* Center the buttons */
+            text-align: center;
         }
         li {
             margin-bottom: 10px;
@@ -73,8 +73,7 @@
         <p>Choose from our suite of powerful calculators to optimize your business strategies:</p>
         <ul>
             <li><button id="cacBtn">Customer Acquisition Cost Calculator</button></li>
-            <li><button id="ltvBtn">Lifetime Value Calculator</button></li>
-            <li><button id="nrrBtn">Net Revenue Retention Calculator</button></li>
+            <!-- Include buttons for other calculators here if needed -->
         </ul>
         <div id="calculatorContainer" class="calculator-content"></div>
         <p>Start making informed decisions today!</p>
@@ -85,24 +84,38 @@
             loadCalculator('CAC.html');
         });
 
-        document.getElementById('ltvBtn').addEventListener('click', function() {
-            loadCalculator('LTV.html');
-        });
-
-        document.getElementById('nrrBtn').addEventListener('click', function() {
-            loadCalculator('NRR.html');
-        });
-
         function loadCalculator(calculatorUrl) {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     document.getElementById('calculatorContainer').innerHTML = this.responseText;
                     document.getElementById('calculatorContainer').style.display = 'block';
+                    // After loading the calculator content, reinitialize the event listeners
+                    initializeCACCalculator();
                 }
             };
             xhttp.open("GET", calculatorUrl, true);
             xhttp.send();
+        }
+
+        function initializeCACCalculator() {
+            // Bind event listener to the "Calculate CAC" button
+            document.getElementById('calculateCACBtn').addEventListener('click', function() {
+                calculateCAC();
+            });
+        }
+
+        function calculateCAC() {
+            var marketingExpense = parseFloat(document.getElementById('marketingExpense').value);
+            var salesExpense = parseFloat(document.getElementById('salesExpense').value);
+            var otherExpense = parseFloat(document.getElementById('otherExpense').value);
+            var customerCount = parseInt(document.getElementById('customerCount').value);
+
+            var totalExpense = marketingExpense + salesExpense + otherExpense;
+            var cac = totalExpense / customerCount;
+
+            document.getElementById('result').innerHTML = "<h3>Customer Acquisition Cost (CAC) = (Total Marketing Expenses + Total Sales Expenses + Total Other Relevant Expenses) / Number of New Customers Acquired</h3>" +
+                "<p>The average CAC is: $" + cac.toFixed(2) + "</p>";
         }
     </script>
 </body>
