@@ -73,7 +73,8 @@
         <p>Choose from our suite of powerful calculators to optimize your business strategies:</p>
         <ul>
             <li><button id="cacBtn">Customer Acquisition Cost Calculator</button></li>
-            <!-- Include buttons for other calculators here if needed -->
+            <li><button id="ltvBtn">Lifetime Value Calculator</button></li>
+            <li><button id="nrrBtn">Net Revenue Retention Calculator</button></li>
         </ul>
         <div id="calculatorContainer" class="calculator-content"></div>
         <p>Start making informed decisions today!</p>
@@ -82,6 +83,14 @@
     <script>
         document.getElementById('cacBtn').addEventListener('click', function() {
             loadCalculator('CAC.html');
+        });
+
+        document.getElementById('ltvBtn').addEventListener('click', function() {
+            loadCalculator('LTV.html');
+        });
+
+        document.getElementById('nrrBtn').addEventListener('click', function() {
+            loadCalculator('NRR.html');
         });
 
         function loadCalculator(calculatorUrl) {
