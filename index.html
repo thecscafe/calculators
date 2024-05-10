@@ -40,26 +40,17 @@
         li {
             margin-bottom: 10px;
         }
-        li button {
+        li a {
             display: block;
             padding: 10px 20px;
             background-color: #007bff;
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
-            border: none;
-            cursor: pointer;
             transition: background-color 0.3s;
         }
-        li button:hover {
+        li a:hover {
             background-color: #0056b3;
-        }
-        .calculator-content {
-            display: none;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -72,38 +63,11 @@
         <h2>Our Calculators</h2>
         <p>Choose from our suite of powerful calculators to optimize your business strategies:</p>
         <ul>
-            <li><button id="cacBtn">Customer Acquisition Cost Calculator</button></li>
-            <li><button id="ltvBtn">Lifetime Value Calculator</button></li>
-            <li><button id="nrrBtn">Net Revenue Retention Calculator</button></li>
+            <li><a href="CAC.html">Customer Acquisition Cost Calculator</a></li>
+            <li><a href="LTV.html">Lifetime Value Calculator</a></li>
+            <li><a href="NRR.html">Net Revenue Retention Calculator</a></li>
         </ul>
-        <div id="calculatorContainer" class="calculator-content"></div>
         <p>Start making informed decisions today!</p>
     </div>
-
-    <script>
-        document.getElementById('cacBtn').addEventListener('click', function() {
-            loadCalculator('CAC.html');
-        });
-
-        document.getElementById('ltvBtn').addEventListener('click', function() {
-            loadCalculator('LTV.html');
-        });
-
-        document.getElementById('nrrBtn').addEventListener('click', function() {
-            loadCalculator('NRR.html');
-        });
-
-        function loadCalculator(calculatorUrl) {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById('calculatorContainer').innerHTML = this.responseText;
-                    document.getElementById('calculatorContainer').style.display = 'block';
-                }
-            };
-            xhttp.open("GET", calculatorUrl, true);
-            xhttp.send();
-        }
-    </script>
 </body>
 </html>
