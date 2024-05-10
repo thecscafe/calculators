@@ -1,47 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CLV Calculator</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-    .container {
-        max-width: 400px;
-        margin: 0 auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-    }
-    input[type="number"] {
-        width: 100%;
-        padding: 8px;
-        margin: 5px 0;
-        box-sizing: border-box;
-    }
-    button {
-        width: 100%;
-        padding: 10px;
-        margin-top: 10px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #45a049;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Lifetime Value (CLV) Calculator - Calculate Your CLV/LTV</title>
+    <meta name="description" content="Use our Customer Lifetime Value (CLV) Calculator to estimate the total revenue your business can expect from a single customer throughout their relationship with your company. Input your Customer Acquisition Cost (CAC), average revenue per customer, and average customer lifespan to calculate your CLV/LTV.">
+    <meta name="keywords" content="customer lifetime value calculator, clv calculator, ltv calculator, calculate clv, calculate ltv, cac, average revenue per customer, customer lifespan, business metrics">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
     <h2>Customer Lifetime Value (CLV) Calculator</h2>
-    <label for="acquisitionCost">CAC | Customer Acquisition Cost ($): (ex. 200)</label>
+    <label for="acquisitionCost">Customer Acquisition Cost (CAC) ($): (ex. 200)</label>
     <input type="number" id="acquisitionCost" placeholder="Enter CAC"><br>
     <label for="averageRevenue">Average Revenue per Customer ($ per month): (ex. 1000)</label>
     <input type="number" id="averageRevenue" placeholder="Enter average revenue per customer"><br>
@@ -59,8 +61,8 @@
 
         var clv = (averageRevenue * averageLifespan) - acquisitionCost;
 
-        document.getElementById('result').innerHTML = "<h3>Customer Lifetime Value (CLV) = (Average Revenue per Customer * Average Customer Lifespan) - Average Acquisition Cost per Customer</h3>" +
-            "<p>The estimated CLV is: $" + clv.toFixed(2) + "</p>";
+        document.getElementById('result').innerHTML = "<h3>Customer Lifetime Value (CLV/LTV) = (Average Revenue per Customer * Average Customer Lifespan) - Customer Acquisition Cost (CAC)</h3>" +
+            "<p>The estimated CLV/LTV is: $" + clv.toFixed(2) + "</p>";
     }
 </script>
 
