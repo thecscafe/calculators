@@ -73,8 +73,7 @@
         <p>Choose from our suite of powerful calculators to optimize your business strategies:</p>
         <ul>
             <li><button id="cacBtn">Customer Acquisition Cost Calculator</button></li>
-            <li><button id="ltvBtn">Customer Lifetime Value Calculator</button></li>
-            <li><button id="nrrBtn">Net Revenue Retention Calculator</button></li>
+            <!-- Include buttons for other calculators here if needed -->
         </ul>
         <div id="calculatorContainer" class="calculator-content"></div>
         <p>Start making informed decisions today!</p>
@@ -85,14 +84,6 @@
             loadCalculator('CAC.html');
         });
 
-        document.getElementById('ltvBtn').addEventListener('click', function() {
-            loadCalculator('LTV.html');
-        });
-
-        document.getElementById('nrrBtn').addEventListener('click', function() {
-            loadCalculator('NRR.html');
-        });
-
         function loadCalculator(calculatorUrl) {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
@@ -100,64 +91,31 @@
                     document.getElementById('calculatorContainer').innerHTML = this.responseText;
                     document.getElementById('calculatorContainer').style.display = 'block';
                     // After loading the calculator content, reinitialize the event listeners
-                    initializeCalculator();
+                    initializeCACCalculator();
                 }
             };
             xhttp.open("GET", calculatorUrl, true);
             xhttp.send();
         }
 
-        function initializeCalculator() {
-            // Bind event listener to the "Calculate" button of the loaded calculator
-            var calculateBtn = document.getElementById('calculateBtn');
-            if (calculateBtn) {
-                calculateBtn.addEventListener('click', function() {
-                    calculate();
-                });
-            }
+        function initializeCACCalculator() {
+            // Bind event listener to the "Calculate CAC" button
+            document.getElementById('calculateCACBtn').addEventListener('click', function() {
+                calculateCAC();
+            });
         }
 
-        function calculate() {
-            // Implement calculation logic for each calculator separately
-            // For demonstration purposes, I'll provide the calculation logic for each calculator here
-            
-            // Calculation for CAC
-            if (document.getElementById('marketingExpense')) {
-                var marketingExpense = parseFloat(document.getElementById('marketingExpense').value);
-                var salesExpense = parseFloat(document.getElementById('salesExpense').value);
-                var otherExpense = parseFloat(document.getElementById('otherExpense').value);
-                var customerCount = parseInt(document.getElementById('customerCount').value);
+        function calculateCAC() {
+            var marketingExpense = parseFloat(document.getElementById('marketingExpense').value);
+            var salesExpense = parseFloat(document.getElementById('salesExpense').value);
+            var otherExpense = parseFloat(document.getElementById('otherExpense').value);
+            var customerCount = parseInt(document.getElementById('customerCount').value);
 
-                var totalExpense = marketingExpense + salesExpense + otherExpense;
-                var cac = totalExpense / customerCount;
+            var totalExpense = marketingExpense + salesExpense + otherExpense;
+            var cac = totalExpense / customerCount;
 
-                document.getElementById('result').innerHTML = "<h3>Customer Acquisition Cost (CAC) = (Total Marketing Expenses + Total Sales Expenses + Total Other Relevant Expenses) / Number of New Customers Acquired</h3>" +
-                    "<p>The average CAC is: $" + cac.toFixed(2) + "</p>";
-            }
-
-            // Calculation for LTV
-            if (document.getElementById('acquisitionCost')) {
-                var acquisitionCost = parseFloat(document.getElementById('acquisitionCost').value);
-                var averageRevenue = parseFloat(document.getElementById('averageRevenue').value);
-                var averageLifespan = parseInt(document.getElementById('averageLifespan').value);
-
-                var clv = (averageRevenue * averageLifespan) - acquisitionCost;
-
-                document.getElementById('result').innerHTML = "<h3>Customer Lifetime Value (CLV) = (Average Revenue per Customer * Average Customer Lifespan) - Average Acquisition Cost per Customer</h3>" +
-                    "<p>The estimated CLV is: $" + clv.toFixed(2) + "</p>";
-            }
-
-            // Calculation for NRR
-            if (document.getElementById('startingRevenue')) {
-                var startingRevenue = parseFloat(document.getElementById('startingRevenue').value);
-                var expansionRevenue = parseFloat(document.getElementById('expansionRevenue').value);
-                var churnedRevenue = parseFloat(document.getElementById('churnedRevenue').value);
-
-                var netRevenueRetention = ((startingRevenue + expansionRevenue - churnedRevenue) / startingRevenue) * 100;
-
-                document.getElementById('result').innerHTML = "<h3>Net Revenue Retention = ((Starting Revenue + Expansion Revenue - Churned Revenue) / Starting Revenue) * 100</h3>" +
-                    "<p>Net Revenue Retention Rate: " + netRevenueRetention.toFixed(2) + "%</p>";
-            }
+            document.getElementById('result').innerHTML = "<h3>Customer Acquisition Cost (CAC) = (Total Marketing Expenses + Total Sales Expenses + Total Other Relevant Expenses) / Number of New Customers Acquired</h3>" +
+                "<p>The average CAC is: $" + cac.toFixed(2) + "</p>";
         }
     </script>
 </body>
