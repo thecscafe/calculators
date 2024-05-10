@@ -79,36 +79,37 @@
     </div>
 
     <script>
-        function loadCalculator(calculatorUrl) {
+    function loadCalculator(calculatorUrl) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById('calculatorContainer').innerHTML = this.responseText;
+                document.getElementById('calculatorContainer').style.display = 'block';
+                initializeCalculator(); // Call initializeCalculator function after loading calculator content
+            }
+        };
+        xhttp.open("GET", calculatorUrl, true);
+        xhttp.send();
+    }
+
+    function initializeCalculator() {
+        var calculatorForm = document.querySelector('.calculator-content form');
+        calculatorForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+            var formData = new FormData(calculatorForm);
+            var formAction = calculatorForm.getAttribute('action');
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById('calculatorContainer').innerHTML = this.responseText;
-                    document.getElementById('calculatorContainer').style.display = 'block';
-                    initializeCalculator();
+                    document.getElementById('result').innerHTML = this.responseText;
                 }
             };
-            xhttp.open("GET", calculatorUrl, true);
-            xhttp.send();
-        }
+            xhttp.open("POST", formAction, true);
+            xhttp.send(formData);
+        });
+    }
+</script>
 
-        function initializeCalculator() {
-            var calculatorForm = document.querySelector('.calculator-content form');
-            calculatorForm.addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent the form from submitting
-                var formData = new FormData(calculatorForm);
-                var formAction = calculatorForm.getAttribute('action');
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById('result').innerHTML = this.responseText;
-                    }
-                };
-                xhttp.open("POST", formAction, true);
-                xhttp.send(formData);
-            });
-        }
-    </script>
 
 </body>
 </html>
