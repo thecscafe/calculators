@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5-Point Revenue Impact Scale Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            max-width: 200px;
+            height: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        table, th, td {
+            border: 1px solid #e0e0e0;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: 500;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .instructions {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 5px;
+        }
+        .button:hover {
+            background-color: #2980b9;
+        }
+        .results {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #edf7ff;
+            border: 1px solid #d4e6f1;
+            border-radius: 5px;
+            display: none;
+        }
+        .score-total {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 15px;
+            color: #2c3e50;
+        }
+        input[type="number"] {
+            width: 60px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .customer-entry {
+            background-color: #f8f8f8;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
+        }
+        .customer-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .rating-factor {
+            margin-bottom: 10px;
+        }
+        .factor-description {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 3px;
+        }
+        .prioritized-list {
+            margin-top: 20px;
+        }
+        .high-priority {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+        .medium-priority {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+        }
+        .low-priority {
+            background-color: #f8f9fa;
+            border-left: 4px solid #6c757d;
+        }
+        .customer-card {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .priority-label {
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 12px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+        .high-label {
+            background-color: #28a745;
+            color: white;
+        }
+        .medium-label {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        .low-label {
+            background-color: #6c757d;
+            color: white;
+        }
+        .score-breakdown {
+            font-size: 0.85em;
+            margin-top: 8px;
+            color: #495057;
+        }
+        .remove-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            float: right;
+        }
+        .remove-button:hover {
+            background-color: #c82333;
+        }
+        .factors-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .impact-visualization {
+            margin-top: 10px;
+            height: 20px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .impact-bar {
+            height: 100%;
+            background-color: #3498db;
+            border-radius: 10px;
+        }
+        .outreach-strategy {
+            margin-top: 15px;
+            background-color: #e8f4f8;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>5-Point Revenue Impact Scale Calculator</h1>
+        <div class="logo">
+            <!-- Replace with your actual logo URL -->
+            <img src="thecscafe.png" alt="The CS Cafe Logo">
+        </div>
+        
+        <div class="instructions">
+            <p><strong>Instructions:</strong> Use this calculator to evaluate the revenue impact potential of your customer contacts. Add customer details and rate them on each dimension to generate a prioritized outreach strategy.</p>
+            <p><strong>Scoring guide:</strong> 1 = Minimal impact/influence, 5 = Maximum impact/influence</p>
+        </div>
+        
+        <div id="customersContainer">
+            <!-- Customer entries will be added here -->
+        </div>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <button onclick="addCustomerEntry()" class="button">+ Add Customer</button>
+        </div>
+        
+        <div style="text-align: center;">
+            <button onclick="calculateScores()" class="button">Calculate Results</button>
+        </div>
+        
+        <div style="text-align: center; margin-top: 10px; display: none;" id="exportPdfButton">
+            <button onclick="exportResultsAsPDF()" class="button">Export Results as PDF</button>
+        </div>
+        
+        <div id="results" class="results">
+            <h2>Revenue Impact Assessment Results</h2>
+            <p>Here are your customers prioritized by their revenue impact potential:</p>
+            <div id="prioritizedCustomers" class="prioritized-list">
+                <!-- Will be populated by JavaScript -->
+            </div>
+            <div id="outreachStrategy" style="margin-top: 25px;">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Counter for unique customer IDs
+        let customerCounter = 0;
+        
+        // Weights for each dimension (can be adjusted)
+        const dimensionWeights = {
+            'revenue': 1.2,      // Revenue directly influenced has highest weight
+            'expansion': 1.1,    // Expansion potential
+            'referral': 1.0,     // Referral power
+            'authority': 1.1,    // Decision-making authority
+            'influence': 1.0     // Industry influence
+        };
+        
+        // Add a new customer entry form
+        function addCustomerEntry() {
+            const customersContainer = document.getElementById('customersContainer');
+            customerCounter++;
+            
+            const customerDiv = document.createElement('div');
+            customerDiv.className = 'customer-entry';
+            customerDiv.id = `customer-${customerCounter}`;
+            
+            customerDiv.innerHTML = `
+                <button class="remove-button" onclick="removeCustomer(${customerCounter})">Remove</button>
+                <h3>Customer #${customerCounter}</h3>
+                
+                <div class="customer-info">
+                    <div>
+                        <label for="name-${customerCounter}">Contact Name:</label>
+                        <input type="text" id="name-${customerCounter}" placeholder="Contact Name">
+                    </div>
+                    <div>
+                        <label for="company-${customerCounter}">Company:</label>
+                        <input type="text" id="company-${customerCounter}" placeholder="Company Name">
+                    </div>
+                    <div>
+                        <label for="position-${customerCounter}">Position:</label>
+                        <input type="text" id="position-${customerCounter}" placeholder="Position/Title">
+                    </div>
+                </div>
+                
+                <h4>Revenue Impact Dimensions</h4>
+                <div class="factors-grid">
+                    <div class="rating-factor">
+                        <label for="revenue-${customerCounter}">Revenue Directly Influenced (1-5):</label>
+                        <input type="number" id="revenue-${customerCounter}" min="1" max="5" placeholder="Score" class="score-input">
+                        <div class="factor-description">The amount of revenue this contact directly influences or controls.</div>
+                    </div>
+                    
+                    <div class="rating-factor">
+                        <label for="expansion-${customerCounter}">Expansion Potential (1-5):</label>
+                        <input type="number" id="expansion-${customerCounter}" min="1" max="5" placeholder="Score" class="score-input">
+                        <div class="factor-description">Potential for upselling or cross-selling through this relationship.</div>
+                    </div>
+                    
+                    <div class="rating-factor">
+                        <label for="referral-${customerCounter}">Referral Power (1-5):</label>
+                        <input type="number" id="referral-${customerCounter}" min="1" max="5" placeholder="Score" class="score-input">
+                        <div class="factor-description">Ability to provide valuable introductions and referrals.</div>
+                    </div>
+                    
+                    <div class="rating-factor">
+                        <label for="authority-${customerCounter}">Decision-making Authority (1-5):</label>
+                        <input type="number" id="authority-${customerCounter}" min="1" max="5" placeholder="Score" class="score-input">
+                        <div class="factor-description">Level of decision-making authority within their organization.</div>
+                    </div>
+                    
+                    <div class="rating-factor">
+                        <label for="influence-${customerCounter}">Industry Influence (1-5):</label>
+                        <input type="number" id="influence-${customerCounter}" min="1" max="5" placeholder="Score" class="score-input">
+                        <div class="factor-description">Broader industry influence and thought leadership.</div>
+                    </div>
+                </div>
+            `;
+            
+            customersContainer.appendChild(customerDiv);
+        }
+        
+        // Remove a customer entry
+        function removeCustomer(id) {
+            const customerDiv = document.getElementById(`customer-${id}`);
+            customerDiv.parentNode.removeChild(customerDiv);
+        }
+        
+        // Calculate scores and prioritize customers
+        function calculateScores() {
+            const customerEntries = document.querySelectorAll('.customer-entry');
+            
+            if (customerEntries.length === 0) {
+                alert('Please add at least one customer to assess.');
+                return;
+            }
+            
+            let scoredCustomers = [];
+            
+            // Calculate weighted score for each customer
+            customerEntries.forEach(customerDiv => {
+                const customerId = customerDiv.id.split('-')[1];
+                
+                const name = document.getElementById(`name-${customerId}`).value.trim();
+                const company = document.getElementById(`company-${customerId}`).value.trim();
+                const position = document.getElementById(`position-${customerId}`).value.trim();
+                
+                if (!name || !company || !position) {
+                    alert('Please fill in all customer information fields.');
+                    return;
+                }
+                
+                const revenueScore = parseInt(document.getElementById(`revenue-${customerId}`).value) || 0;
+                const expansionScore = parseInt(document.getElementById(`expansion-${customerId}`).value) || 0;
+                const referralScore = parseInt(document.getElementById(`referral-${customerId}`).value) || 0;
+                const authorityScore = parseInt(document.getElementById(`authority-${customerId}`).value) || 0;
+                const influenceScore = parseInt(document.getElementById(`influence-${customerId}`).value) || 0;
+                
+                if (revenueScore === 0 || expansionScore === 0 || referralScore === 0 || 
+                    authorityScore === 0 || influenceScore === 0) {
+                    alert('Please rate all dimensions for each customer.');
+                    return;
+                }
+                
+                // Calculate weighted score
+                const weightedScore = (
+                    revenueScore * dimensionWeights.revenue +
+                    expansionScore * dimensionWeights.expansion +
+                    referralScore * dimensionWeights.referral +
+                    authorityScore * dimensionWeights.authority +
+                    influenceScore * dimensionWeights.influence
+                ) / Object.values(dimensionWeights).reduce((a, b) => a + b, 0);
+                
+                scoredCustomers.push({
+                    name,
+                    company,
+                    position,
+                    scores: {
+                        revenue: revenueScore,
+                        expansion: expansionScore,
+                        referral: referralScore,
+                        authority: authorityScore,
+                        influence: influenceScore
+                    },
+                    weightedScore: weightedScore
+                });
+            });
+            
+            // Sort customers by weighted score (highest first)
+            scoredCustomers.sort((a, b) => b.weightedScore - a.weightedScore);
+            
+            // Display prioritized customers
+            displayPrioritizedCustomers(scoredCustomers);
+            
+            // Show results and export button
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('exportPdfButton').style.display = 'block';
+        }
+        
+        // Display prioritized customers in results
+        function displayPrioritizedCustomers(customers) {
+            const prioritizedCustomersDiv = document.getElementById('prioritizedCustomers');
+            prioritizedCustomersDiv.innerHTML = '';
+            
+            if (customers.length === 0) return;
+            
+            // Determine priority thresholds
+            const highPriorityThreshold = 4.0;
+            const mediumPriorityThreshold = 3.0;
+            
+            customers.forEach(customer => {
+                const customerCard = document.createElement('div');
+                
+                // Set priority class based on weighted score
+                let priorityClass, priorityLabel;
+                if (customer.weightedScore >= highPriorityThreshold) {
+                    priorityClass = 'high-priority';
+                    priorityLabel = '<span class="priority-label high-label">HIGH IMPACT</span>';
+                } else if (customer.weightedScore >= mediumPriorityThreshold) {
+                    priorityClass = 'medium-priority';
+                    priorityLabel = '<span class="priority-label medium-label">MEDIUM IMPACT</span>';
+                } else {
+                    priorityClass = 'low-priority';
+                    priorityLabel = '<span class="priority-label low-label">LOW IMPACT</span>';
+                }
+                
+                customerCard.className = `customer-card ${priorityClass}`;
+                
+                // Calculate percentage for visualization bar
+                const impactPercentage = (customer.weightedScore / 5) * 100;
+                
+                // Format the content
+                customerCard.innerHTML = `
+                    <div>
+                        ${priorityLabel}
+                        <strong>${customer.name}</strong> - ${customer.position} at ${customer.company}
+                    </div>
+                    <div>
+                        <strong>Revenue Impact Score:</strong> ${customer.weightedScore.toFixed(1)} / 5
+                    </div>
+                    <div class="impact-visualization">
+                        <div class="impact-bar" style="width: ${impactPercentage}%"></div>
+                    </div>
+                    <div class="score-breakdown">
+                        Revenue Influenced: ${customer.scores.revenue}/5 | 
+                        Expansion Potential: ${customer.scores.expansion}/5 | 
+                        Referral Power: ${customer.scores.referral}/5 | 
+                        Decision Authority: ${customer.scores.authority}/5 | 
+                        Industry Influence: ${customer.scores.influence}/5
+                    </div>
+                `;
+                
+                prioritizedCustomersDiv.appendChild(customerCard);
+            });
+            
+            // Generate outreach strategy based on assessment
+            const outreachStrategyDiv = document.getElementById('outreachStrategy');
+            const highImpactCustomers = customers.filter(c => c.weightedScore >= highPriorityThreshold);
+            const mediumImpactCustomers = customers.filter(c => c.weightedScore >= mediumPriorityThreshold && c.weightedScore < highPriorityThreshold);
+            
+            let strategyHTML = '<h3>Prioritized Outreach Strategy</h3>';
+            
+            if (highImpactCustomers.length > 0) {
+                strategyHTML += `
+                    <div class="outreach-strategy">
+                        <h4>High Impact Contacts (${highImpactCustomers.length})</h4>
+                        <p><strong>Approach:</strong> Use the Executive-Level Outreach Framework with these contacts. Focus on business outcomes and specific revenue impacts you've delivered.</p>
+                        <p><strong>Timing:</strong> Reach out to these contacts within the first 3-5 days of your campaign.</p>
+                        <p><strong>Follow-up:</strong> If no response after 5 days, send a targeted follow-up referencing specific projects or achievements.</p>
+                        <p><strong>Key contacts:</strong> ${highImpactCustomers.map(c => c.name).join(', ')}</p>
+                    </div>
+                `;
+            }
+            
+            if (mediumImpactCustomers.length > 0) {
+                strategyHTML += `
+                    <div class="outreach-strategy">
+                        <h4>Medium Impact Contacts (${mediumImpactCustomers.length})</h4>
+                        <p><strong>Approach:</strong> Use the standard outreach template with personalized details about your working relationship.</p>
+                        <p><strong>Timing:</strong> Reach out to these contacts 5-7 days after contacting high-impact connections.</p>
+                        <p><strong>Follow-up:</strong> If no response after 7 days, send a casual check-in.</p>
+                        <p><strong>Key contacts:</strong> ${mediumImpactCustomers.map(c => c.name).join(', ')}</p>
+                    </div>
+                `;
+            }
+            
+            const lowImpactCustomers = customers.filter(c => c.weightedScore < mediumPriorityThreshold);
+            if (lowImpactCustomers.length > 0) {
+                strategyHTML += `
+                    <div class="outreach-strategy">
+                        <h4>Low Impact Contacts (${lowImpactCustomers.length})</h4>
+                        <p><strong>Approach:</strong> Use the Casual Curiosity Framework with these contacts, focusing on building rapport and seeking advice.</p>
+                        <p><strong>Timing:</strong> Reach out to these contacts as part of a broader networking effort after primary contacts.</p>
+                        <p><strong>Alternative:</strong> Consider using these contacts for second-degree connections rather than direct job opportunities.</p>
+                    </div>
+                `;
+            }
+            
+            outreachStrategyDiv.innerHTML = strategyHTML;
+        }
+        
+        // Export results as PDF
+        function exportResultsAsPDF() {
+            // Get the results element
+            const resultsElement = document.getElementById('results');
+            
+            // Create a temp div with a branded header
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <img src="../calculators/thecscafe.png" alt="The CS Cafe Logo" style="max-width: 200px;">
+                    <h1 style="color: #2c3e50;">Revenue Impact Scale Results</h1>
+                    <p>Generated on ${new Date().toLocaleDateString()}</p>
+                </div>
+            `;
+            
+            // Clone the results content
+            const resultsContent = resultsElement.cloneNode(true);
+            tempDiv.appendChild(resultsContent);
+            
+            // Configure pdf options
+            const options = {
+                margin: [15, 15, 15, 15],
+                filename: 'revenue-impact-scale-results.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            
+            // Generate and download the PDF
+            html2pdf().from(tempDiv).set(options).save();
+        }
+        
+        // Add initial customer entry when page loads
+        window.onload = function() {
+            addCustomerEntry();
+        };
+    </script>
+</body>
+</html>
