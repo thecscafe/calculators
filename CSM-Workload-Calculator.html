@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSM Workload Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            max-width: 200px;
+            height: auto;
+        }
+        .instructions {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 5px;
+        }
+        .button:hover {
+            background-color: #2980b9;
+        }
+        .results {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #edf7ff;
+            border: 1px solid #d4e6f1;
+            border-radius: 5px;
+            display: none;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-family: inherit;
+            font-size: 16px;
+        }
+        .form-section {
+            background-color: #f8f8f8;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        .form-hint {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 3px;
+        }
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .section-title h3 {
+            margin: 0;
+            color: #2c3e50;
+        }
+        .section-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CSM Workload Calculator</h1>
+        <div class="logo">
+            <!-- Replace with your actual logo URL -->
+            <img src="../assets/thecscafe.png" alt="The CS Cafe Logo">
+        </div>
+        
+        <div class="instructions">
+            <p><strong>The CSM Workload Calculator</strong> helps you determine the optimal number of accounts a Customer Success Manager can effectively handle based on various factors such as account complexity, product type, and required activities.</p>
+            <p>Fill in the details below to calculate your recommended CSM workload and compare it to industry benchmarks.</p>
+        </div>
+        
+        <div class="form-section">
+            <div class="section-title">
+                <div class="section-number">1</div>
+                <h3>Account Information</h3>
+            </div>
+            
+            <div class="form-group">
+                <label for="account_type">Account Type:</label>
+                <select id="account_type">
+                    <option value="enterprise">Enterprise</option>
+                    <option value="mid_market">Mid-Market</option>
+                    <option value="smb">SMB</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="avg_contract_value">Average Annual Contract Value ($):</label>
+                <input type="number" id="avg_contract_value" min="0" step="1000">
+            </div>
+            
+            <div class="form-group">
+                <label for="product_complexity">Product Complexity:</label>
+                <select id="product_complexity">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <div class="section-title">
+                <div class="section-number">2</div>
+                <h3>CSM Activities</h3>
+            </div>
+            
+            <div class="form-group">
+                <label for="onboarding_time">Average Onboarding Time (hours):</label>
+                <input type="number" id="onboarding_time" min="0" step="0.5">
+            </div>
+            
+            <div class="form-group">
+                <label for="qbr_frequency">Quarterly Business Review Frequency:</label>
+                <select id="qbr_frequency">
+                    <option value="monthly">Monthly</option>
+                    <option value="quarterly">Quarterly</option>
+                    <option value="biannually">Bi-annually</option>
+                    <option value="annually">Annually</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="support_time">Average Weekly Support Time per Account (hours):</label>
+                <input type="number" id="support_time" min="0" step="0.5">
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <div class="section-title">
+                <div class="section-number">3</div>
+                <h3>CSM Work Schedule</h3>
+            </div>
+            
+            <div class="form-group">
+                <label for="work_hours">Weekly Work Hours:</label>
+                <input type="number" id="work_hours" min="20" max="60" value="40">
+            </div>
+            
+            <div class="form-group">
+                <label for="admin_time">Weekly Administrative Time (hours):</label>
+                <input type="number" id="admin_time" min="0" step="0.5">
+                <div class="form-hint">Time spent on internal meetings, reporting, etc.</div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <button onclick="calculateWorkload()" class="button">Calculate CSM Workload</button>
+        </div>
+        
+        <div id="results" class="results">
+            <h2>CSM Workload Results</h2>
+            <div id="workload_result"></div>
+            <div id="benchmark_comparison"></div>
+            <div id="recommendations"></div>
+        </div>
+    </div>
+    
+    <script>
+        function calculateWorkload() {
+            // Get input values
+            const accountType = document.getElementById('account_type').value;
+            const avgContractValue = parseFloat(document.getElementById('avg_contract_value').value);
+            const productComplexity = document.getElementById('product_complexity').value;
+            const onboardingTime = parseFloat(document.getElementById('onboarding_time').value);
+            const qbrFrequency = document.getElementById('qbr_frequency').value;
+            const supportTime = parseFloat(document.getElementById('support_time').value);
+            const workHours = parseFloat(document.getElementById('work_hours').value);
+            const adminTime = parseFloat(document.getElementById('admin_time').value);
+            
+            // Calculate available time for account management
+            const availableTime = workHours - adminTime;
+            
+            // Calculate time per account
+            let timePerAccount = supportTime;
+            if (qbrFrequency === 'monthly') timePerAccount += 2;
+            else if (qbrFrequency === 'quarterly') timePerAccount += 0.5;
+            else if (qbrFrequency === 'biannually') timePerAccount += 0.25;
+            else if (qbrFrequency === 'annually') timePerAccount += 0.125;
+            
+            // Add onboarding time (assuming 1 onboarding per quarter)
+            timePerAccount += onboardingTime / 13;
+            
+            // Calculate optimal number of accounts
+            let optimalAccounts = Math.floor(availableTime / timePerAccount);
+            
+            // Adjust based on account type and product complexity
+            if (accountType === 'enterprise') optimalAccounts *= 0.7;
+            else if (accountType === 'smb') optimalAccounts *= 1.3;
+            
+            if (productComplexity === 'high') optimalAccounts *= 0.8;
+            else if (productComplexity === 'low') optimalAccounts *= 1.2;
+            
+            optimalAccounts = Math.round(optimalAccounts);
+            
+            // Get benchmark range
+            let benchmarkLow, benchmarkHigh;
+            if (accountType === 'enterprise') {
+                benchmarkLow = 10;
+                benchmarkHigh = 30;
+            } else if (accountType === 'mid_market') {
+                benchmarkLow = 30;
+                benchmarkHigh = 80;
+            } else {
+                benchmarkLow = 100;
+                benchmarkHigh = 300;
+            }
+            
+            // Generate results
+            const resultDiv = document.getElementById('workload_result');
+            resultDiv.innerHTML = `<p>Based on your inputs, the optimal number of accounts per CSM is: <strong>${optimalAccounts}</strong></p>`;
+            
+            const benchmarkDiv = document.getElementById('benchmark_comparison');
+            benchmarkDiv.innerHTML = `<p>Industry benchmark for ${accountType} accounts: ${benchmarkLow} - ${benchmarkHigh}</p>`;
+            
+            const recommendationsDiv = document.getElementById('recommendations');
+            let recommendations = '<h3>Recommendations:</h3><ul>';
+            
+            if (optimalAccounts < benchmarkLow) {
+                recommendations += '<li>Consider increasing efficiency or reducing time spent on administrative tasks.</li>';
+                recommendations += '<li>Evaluate if product complexity can be reduced to allow for more accounts per CSM.</li>';
+            } else if (optimalAccounts > benchmarkHigh) {
+                recommendations += '<li>Your CSMs may be overloaded. Consider hiring additional CSMs or implementing more automation.</li>';
+                recommendations += '<li>Review your support processes to ensure quality is maintained with this high account load.</li>';
+            } else {
+                recommendations += '<li>Your calculated workload aligns well with industry benchmarks.</li>';
+                recommendations += '<li>Continue to monitor CSM satisfaction and customer health scores to ensure this workload remains optimal.</li>';
+            }
+            
+            recommendations += '</ul>';
+            recommendationsDiv.innerHTML = recommendations;
+            
+            // Show results
+            document.getElementById('results').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
