@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Value-First ROI Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+    }
+    .input-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .button {
+      background-color: #3498db;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    .button:hover {
+      background-color: #2980b9;
+    }
+    .results {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #edf7ff;
+      border: 1px solid #d4e6f1;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Value-First ROI Calculator</h1>
+    <div class="input-group">
+      <label for="contract">Current Contract Value ($)</label>
+      <input type="number" id="contract" placeholder="e.g., 100000">
+    </div>
+    <div class="input-group">
+      <label for="value">Monetized Value Delivered ($)</label>
+      <input type="number" id="value" placeholder="e.g., 400000">
+    </div>
+    <div class="input-group">
+      <label for="increase">Proposed Price Increase (%)</label>
+      <input type="number" id="increase" placeholder="e.g., 5">
+    </div>
+    <button class="button" onclick="calculateROI()">Calculate ROI</button>
+
+    <div class="results" id="results" style="display:none;">
+      <h3>ROI Summary</h3>
+      <p><strong>ROI Multiple:</strong> <span id="roi"></span>x</p>
+      <p><strong>New Contract Value:</strong> $<span id="newVal"></span></p>
+      <p><strong>ROI at New Price:</strong> <span id="roiNew"></span>x</p>
+    </div>
+  </div>
+
+  <script>
+    function calculateROI() {
+      const contract = parseFloat(document.getElementById('contract').value);
+      const value = parseFloat(document.getElementById('value').value);
+      const increase = parseFloat(document.getElementById('increase').value);
+
+      if (!contract || !value || !increase) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      const roi = (value / contract).toFixed(2);
+      const newContract = contract * (1 + increase / 100);
+      const roiNew = (value / newContract).toFixed(2);
+
+      document.getElementById('roi').textContent = roi;
+      document.getElementById('newVal').textContent = newContract.toFixed(2);
+      document.getElementById('roiNew').textContent = roiNew;
+      document.getElementById('results').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
