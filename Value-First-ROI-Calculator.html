@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +23,21 @@
     h1 {
       color: #2c3e50;
       text-align: center;
+    }
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .logo img {
+      max-width: 200px;
+      height: auto;
+    }
+    .instructions {
+      background-color: #ecf0f1;
+      padding: 15px;
+      border-left: 4px solid #3498db;
+      margin-bottom: 20px;
+      border-radius: 4px;
     }
     .input-group {
       margin-bottom: 15px;
@@ -62,6 +78,19 @@
 <body>
   <div class="container">
     <h1>Value-First ROI Calculator</h1>
+    <div class="logo">
+      <img src="thecscafe.png" alt="The CS Cafe Logo">
+    </div>
+    <div class="instructions">
+      <p><strong>What this is:</strong> A fast way to anchor price increase discussions in ROI—so you can move from defensiveness to confidence.</p>
+      <p><strong>How to use it:</strong> Enter the current contract value, the total monetized value you've delivered, and your proposed increase. The calculator shows:</p>
+      <ul>
+        <li>Your current ROI multiple (value ÷ contract)</li>
+        <li>What ROI would be after a price increase</li>
+        <li>New contract value after increase</li>
+      </ul>
+      <p><em>Ideal for CS teams prepping for renewal, pricing, or upsell conversations with finance or procurement stakeholders.</em></p>
+    </div>
     <div class="input-group">
       <label for="contract">Current Contract Value ($)</label>
       <input type="number" id="contract" placeholder="e.g., 100000">
@@ -75,7 +104,6 @@
       <input type="number" id="increase" placeholder="e.g., 5">
     </div>
     <button class="button" onclick="calculateROI()">Calculate ROI</button>
-
     <div class="results" id="results" style="display:none;">
       <h3>ROI Summary</h3>
       <p><strong>ROI Multiple:</strong> <span id="roi"></span>x</p>
