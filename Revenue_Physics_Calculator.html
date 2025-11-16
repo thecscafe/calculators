@@ -3,158 +3,484 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CS Revenue Physics Calculator</title>
+    <title>Revenue Physics Calculator | CS Impact To Revenue</title>
+    <meta name="description" content="Revenue Physics Calculator for Customer Success leaders. Turn health scores, feature adoption and onboarding efficiency into estimated revenue impact using simple, executive-friendly formulas. Built by The Customer Success Café.">
+    <meta name="keywords" content="revenue physics calculator, customer success revenue impact, health score revenue, feature adoption revenue, onboarding ROI, The Customer Success Café, TheCScafe.com">
+    <link rel="canonical" href="https://thecscafe.github.io/calculators/Revenue_Physics_Calculator.html">
+
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        
-        .calculator {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        :root {
+            --primary: #0052cc;
+            --primary-dark: #003c99;
+            --accent: #ffb74d;
+            --bg: #f5f7fb;
+            --text: #1f2933;
+            --muted: #6b7280;
+            --card-bg: #ffffff;
+            --border-subtle: #e5e7eb;
         }
 
-        h1 {
-            color: #2c3e50;
-            font-size: 24px;
-            margin-bottom: 20px;
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+        }
+
+        header {
+            background: linear-gradient(135deg, #001f4d, #003c99);
+            color: #fff;
+            padding: 22px 16px 26px;
+        }
+
+        .header-inner {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .brand-badge {
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #cbd5ff;
+        }
+
+        .header-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .breadcrumb {
+            font-size: 13px;
+        }
+
+        .breadcrumb a {
+            color: #cbd5ff;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        header h1 {
+            margin: 4px 0 8px;
+            font-size: 26px;
+            line-height: 1.2;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 14px;
+            max-width: 620px;
+            color: #e5e7ff;
+        }
+
+        .header-cta-group {
+            margin-top: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-primary,
+        .btn-ghost {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s, color 0.2s, transform 0.1s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #1b2735;
+        }
+
+        .btn-primary:hover {
+            background-color: #ffa726;
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            background-color: transparent;
+            color: #e5e7ff;
+            border: 1px solid rgba(229, 231, 255, 0.5);
+        }
+
+        .btn-ghost:hover {
+            background-color: rgba(15, 23, 42, 0.45);
+            transform: translateY(-1px);
+        }
+
+        main {
+            max-width: 960px;
+            margin: 22px auto 36px;
+            padding: 0 16px;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr);
+            gap: 18px;
+        }
+
+        @media (min-width: 880px) {
+            .layout {
+                grid-template-columns: minmax(0, 3fr) minmax(260px, 2fr);
+            }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 18px 18px 16px;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+        }
+
+        .card h2 {
+            margin: 0 0 8px;
+            font-size: 20px;
+        }
+
+        .card p {
+            margin: 0 0 10px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .sub-label {
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 8px;
         }
 
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         label {
             display: block;
-            margin-bottom: 5px;
-            color: #34495e;
+            margin-bottom: 4px;
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 500;
         }
 
-        select, input {
+        .field-hint {
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 3px;
+        }
+
+        select, input[type="number"] {
             width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 10px;
+            padding: 8px 10px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            margin-bottom: 4px;
+            font-size: 14px;
+            background-color: #ffffff;
+        }
+
+        select:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 1px rgba(0, 82, 204, 0.15);
         }
 
         button {
-            background-color: #3498db;
+            background-color: var(--primary);
             color: white;
-            padding: 10px 20px;
+            padding: 10px 16px;
             border: none;
-            border-radius: 4px;
+            border-radius: 999px;
             cursor: pointer;
             width: 100%;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background-color 0.2s, transform 0.1s;
         }
 
         button:hover {
-            background-color: #2980b9;
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
         }
 
         .result {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 4px;
-            text-align: center;
+            margin-top: 14px;
+            padding: 12px;
+            background-color: #f3f4ff;
+            border-radius: 10px;
+            border: 1px solid #d1d5ff;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .result-label {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 4px;
         }
 
         .result-value {
-            font-size: 24px;
+            font-size: 22px;
             color: #27ae60;
             font-weight: bold;
+        }
+
+        .result-note {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 6px;
+        }
+
+        .helper-text {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        .formula-block {
+            margin-top: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background-color: #f9fafb;
+            border: 1px dashed var(--border-subtle);
+            font-size: 12px;
+        }
+
+        .formula-block ul {
+            margin: 6px 0 0;
+            padding-left: 18px;
+        }
+
+        .formula-block li {
+            margin-bottom: 3px;
+        }
+
+        .sidebar-card h3 {
+            margin-top: 0;
+            margin-bottom: 6px;
+            font-size: 16px;
+        }
+
+        .sidebar-card p {
+            margin-bottom: 8px;
+        }
+
+        .sidebar-list {
+            margin: 6px 0 0;
+            padding-left: 18px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .sidebar-list li {
+            margin-bottom: 3px;
+        }
+
+        .sidebar-footer {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .sidebar-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .sidebar-footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            border-top: 1px solid #e5e7eb;
+            padding: 16px 16px 24px;
+            background-color: #ffffff;
+        }
+
+        .footer-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            font-size: 12px;
+            color: var(--muted);
         }
     </style>
 </head>
 <body>
-    <div class="calculator">
-        <h1>💰 Revenue Physics Calculator</h1>
-        
-        <div class="input-group">
-            <label for="metricType">Select Metric Type:</label>
-            <select id="metricType">
-                <option value="healthScore">Health Score Improvement</option>
-                <option value="adoption">Feature Adoption Rate</option>
-                <option value="onboarding">Onboarding Efficiency</option>
-            </select>
+<header>
+    <div class="header-inner">
+        <div class="header-top-row">
+            <div class="brand-badge">The Customer Success Café · TheCScafe.com</div>
+            <nav class="breadcrumb">
+                <a href="./">&larr; All CS & SaaS calculators</a>
+            </nav>
         </div>
-
-        <div class="input-group">
-            <label for="baseArr">Base ARR ($):</label>
-            <input type="number" id="baseArr" placeholder="Enter base ARR (e.g., 1000000)">
-        </div>
-
-        <div class="input-group">
-            <label for="metricValue">Metric Value (%):</label>
-            <input type="number" id="metricValue" placeholder="Enter value (e.g., 20)">
-        </div>
-
-        <div id="problemCostGroup" class="input-group" style="display: none;">
-            <label for="problemCost">Problem Cost ($):</label>
-            <input type="number" id="problemCost" placeholder="Enter problem cost">
-        </div>
-
-        <button onclick="calculateRevenue()">Calculate Revenue Impact</button>
-
-        <div class="result">
-            <div>Revenue Impact:</div>
-            <div class="result-value" id="result">$0</div>
+        <h1>Revenue Physics Calculator</h1>
+        <p>
+            Turn “good CS work” into a revenue number. Use simple formulas to show how health, adoption and onboarding shifts move ARR in real terms.
+        </p>
+        <div class="header-cta-group">
+            <a class="btn-primary" href="https://www.thecscafe.com" target="_blank" rel="noopener noreferrer">
+                Join 4,300+ CS pros · Weekly NRR playbooks
+            </a>
+            <a class="btn-ghost" href="#rev-physics-form">
+                Go to calculator
+            </a>
         </div>
     </div>
+</header>
 
-    <div style="margin-top: 30px; padding: 20px; border-top: 1px solid #eee; color: #666; font-size: 14px;">
-    <h3 style="color: #2c3e50; margin-bottom: 10px;">About This Calculator</h3>
-    <p>This Revenue Physics Calculator helps CS leaders translate traditional metrics into revenue impact using proven formulas:</p>
-    <ul style="margin-left: 20px; line-height: 1.6;">
-        <li><strong>Health Score → Revenue:</strong> (Score Improvement %) × Base ARR × 0.8</li>
-        <li><strong>Adoption → Revenue:</strong> (Adoption Rate %) × Base ARR × 0.92</li>
-        <li><strong>Onboarding → Value:</strong> Problem Cost × 0.8 × (Efficiency %) × 2.5</li>
-    </ul>
-    <p style="margin-top: 15px;">
-        <em>Part of The CS Cafe's Leadership Physics Framework™ - helping CS leaders translate metrics into executive-ready revenue impact.</em>
-    </p>
-    <p style="margin-top: 10px; font-size: 12px; color: #999;">
-        © 2025 The CS Cafe | Created by Hakan
-    </p>
-</div>
+<main>
+    <div class="layout">
+        <!-- Main calculator card -->
+        <section class="card" id="rev-physics-form" aria-labelledby="rev-physics-heading">
+            <h2 id="rev-physics-heading">Estimate revenue impact from CS metrics</h2>
+            <p>
+                Select a metric you are improving, plug in your base ARR and metric value, and see the estimated revenue impact. Use it as a talking point with leadership, not a GAAP forecast.
+            </p>
+            <div class="sub-label">
+                Tip: Keep one metric per run. If you stack improvements, present them separately so the story stays clear.
+            </div>
 
+            <div class="input-group">
+                <label for="metricType">Metric type</label>
+                <div class="field-hint">
+                    Pick the CS lever you are moving so the calculator applies the right revenue factor.
+                </div>
+                <select id="metricType">
+                    <option value="healthScore">Health score improvement (%)</option>
+                    <option value="adoption">Feature adoption rate (%)</option>
+                    <option value="onboarding">Onboarding efficiency (%)</option>
+                </select>
+            </div>
 
-    <script>
-        document.getElementById('metricType').addEventListener('change', function() {
-            const problemCostGroup = document.getElementById('problemCostGroup');
-            problemCostGroup.style.display = this.value === 'onboarding' ? 'block' : 'none';
-        });
+            <div class="input-group">
+                <label for="baseArr">Base ARR ($)</label>
+                <div class="field-hint">
+                    Current annual recurring revenue for the segment or book of business this metric applies to.
+                </div>
+                <input type="number" id="baseArr" placeholder="Example: 1000000">
+            </div>
 
-        function calculateRevenue() {
-            const metricType = document.getElementById('metricType').value;
-            const baseArr = parseFloat(document.getElementById('baseArr').value) || 0;
-            const metricValue = parseFloat(document.getElementById('metricValue').value) || 0;
-            const problemCost = parseFloat(document.getElementById('problemCost').value) || 0;
+            <div class="input-group">
+                <label for="metricValue">Metric value (%)</label>
+                <div class="field-hint">
+                    For health and adoption, use the improvement or coverage you expect. For onboarding, use the efficiency gain.
+                </div>
+                <input type="number" id="metricValue" placeholder="Example: 20">
+            </div>
 
-            let revenue = 0;
+            <div id="problemCostGroup" class="input-group" style="display: none;">
+                <label for="problemCost">Problem cost ($)</label>
+                <div class="field-hint">
+                    For onboarding, estimate the cost of delays, rework or missed value you want to reduce.
+                </div>
+                <input type="number" id="problemCost" placeholder="Example: 50000">
+            </div>
 
-            switch(metricType) {
-                case 'healthScore':
-                    revenue = (metricValue/100) * baseArr * 0.8;
-                    break;
-                case 'adoption':
-                    revenue = (metricValue/100) * baseArr * 0.92;
-                    break;
-                case 'onboarding':
-                    revenue = problemCost * 0.8 * (metricValue/100) * 2.5;
-                    break;
-            }
+            <button onclick="calculateRevenue()">Calculate revenue impact</button>
 
-            document.getElementById('result').textContent = 
-                '$' + revenue.toLocaleString(undefined, {maximumFractionDigits: 0});
+            <div class="result" aria-live="polite">
+                <div class="result-label">Estimated revenue impact:</div>
+                <div class="result-value" id="result">$0</div>
+                <div class="result-note">
+                    Use this as a directional estimate when you frame your roadmap or headcount asks. Keep finance in the loop if you turn this into targets.
+                </div>
+            </div>
+
+            <div class="formula-block">
+                <strong>How this calculator works</strong>
+                <ul>
+                    <li><strong>Health score → revenue:</strong> (Score improvement %)&nbsp;× Base ARR × 0.8</li>
+                    <li><strong>Adoption → revenue:</strong> (Adoption rate %)&nbsp;× Base ARR × 0.92</li>
+                    <li><strong>Onboarding → value:</strong> Problem cost × 0.8 × (Efficiency %)&nbsp;× 2.5</li>
+                </ul>
+                <p style="margin-top:6px;">
+                    These factors come from the CS Café Leadership Physics Framework™ and are designed to give CS leaders a simple way to translate metrics into revenue language.
+                </p>
+            </div>
+
+            <div class="helper-text">
+                Bring this output into your next QBR, roadmap review or budget conversation to show why “better onboarding” or “higher adoption” is not just a nice idea but a revenue lever.
+            </div>
+        </section>
+
+        <!-- Sidebar -->
+        <aside class="card sidebar-card" aria-label="Customer Success Café newsletter">
+            <h3>From metric charts to revenue stories</h3>
+            <p>
+                This tool gives you a quick estimate. The newsletter shows you how to present it like a revenue leader, not just someone who owns dashboards.
+            </p>
+            <ul class="sidebar-list">
+                <li>Turn health score shifts into clear NRR impact narratives</li>
+                <li>Build adoption plans that line up with real ARR opportunity</li>
+                <li>Show how onboarding work pulls future churn risk forward</li>
+            </ul>
+            <div style="margin-top:10px;">
+                <a class="btn-primary" href="https://www.thecscafe.com" target="_blank" rel="noopener noreferrer">
+                    Get the CS Café newsletter
+                </a>
+            </div>
+            <div class="sidebar-footer">
+                For CS leaders who want to grow NRR, protect revenue and earn a seat in budget and strategy conversations.
+            </div>
+        </aside>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-inner">
+        <p>
+            Part of The CS Café Leadership Physics Framework™ &middot; © 2025 The Customer Success Café | Created by Hakan.
+        </p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('metricType').addEventListener('change', function() {
+        const problemCostGroup = document.getElementById('problemCostGroup');
+        problemCostGroup.style.display = this.value === 'onboarding' ? 'block' : 'none';
+    });
+
+    function calculateRevenue() {
+        const metricType = document.getElementById('metricType').value;
+        const baseArr = parseFloat(document.getElementById('baseArr').value) || 0;
+        const metricValue = parseFloat(document.getElementById('metricValue').value) || 0;
+        const problemCost = parseFloat(document.getElementById('problemCost').value) || 0;
+
+        let revenue = 0;
+
+        switch(metricType) {
+            case 'healthScore':
+                revenue = (metricValue / 100) * baseArr * 0.8;
+                break;
+            case 'adoption':
+                revenue = (metricValue / 100) * baseArr * 0.92;
+                break;
+            case 'onboarding':
+                revenue = problemCost * 0.8 * (metricValue / 100) * 2.5;
+                break;
         }
-    </script>
+
+        document.getElementById('result').textContent =
+            '$' + revenue.toLocaleString(undefined, { maximumFractionDigits: 0 });
+    }
+</script>
 </body>
 </html>
