@@ -3,63 +3,383 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Net Revenue Retention Calculator - Calculate Your NRR</title>
-    <meta name="description" content="Calculate the percentage of revenue retained from existing customers after accounting for expansions and churn using our Net Revenue Retention Calculator. Input your starting revenue, expansion revenue, and churned revenue to calculate your Net Revenue Retention Rate.">
-    <meta name="keywords" content="net revenue retention calculator, nrr calculator, calculate nrr, starting revenue, expansion revenue, churned revenue, customer retention, business metrics">
+    <title>NRR Calculator | Net Revenue Retention For SaaS & CS Leaders</title>
+    <meta name="description" content="Free Net Revenue Retention (NRR) calculator for SaaS and Customer Success leaders. Measure how well you keep and grow revenue from existing customers so you can protect NRR and tell a clear story to leadership. Built by The Customer Success Café.">
+    <meta name="keywords" content="NRR calculator, net revenue retention calculator, SaaS NRR, customer success metrics, revenue retention, The Customer Success Café, TheCScafe.com">
+    <link rel="canonical" href="https://thecscafe.github.io/calculators/NRR.html">
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
+        :root {
+            --primary: #0052cc;
+            --primary-dark: #003c99;
+            --accent: #ffb74d;
+            --bg: #f5f7fb;
+            --text: #1f2933;
+            --muted: #6b7280;
+            --card-bg: #ffffff;
+            --border-subtle: #e5e7eb;
         }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        input[type="number"] {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0;
+
+        * {
             box-sizing: border-box;
         }
-        button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
         }
-        button:hover {
-            background-color: #45a049;
+
+        header {
+            background: linear-gradient(135deg, #001f4d, #003c99);
+            color: #fff;
+            padding: 22px 16px 26px;
+        }
+
+        .header-inner {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .brand-badge {
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #cbd5ff;
+        }
+
+        .header-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .breadcrumb {
+            font-size: 13px;
+        }
+
+        .breadcrumb a {
+            color: #cbd5ff;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        header h1 {
+            margin: 4px 0 8px;
+            font-size: 26px;
+            line-height: 1.2;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 14px;
+            max-width: 620px;
+            color: #e5e7ff;
+        }
+
+        .header-cta-group {
+            margin-top: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-primary,
+        .btn-ghost {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s, color 0.2s, transform 0.1s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #1b2735;
+        }
+
+        .btn-primary:hover {
+            background-color: #ffa726;
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            background-color: transparent;
+            color: #e5e7ff;
+            border: 1px solid rgba(229, 231, 255, 0.5);
+        }
+
+        .btn-ghost:hover {
+            background-color: rgba(15, 23, 42, 0.45);
+            transform: translateY(-1px);
+        }
+
+        main {
+            max-width: 960px;
+            margin: 22px auto 36px;
+            padding: 0 16px;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr);
+            gap: 18px;
+        }
+
+        @media (min-width: 880px) {
+            .layout {
+                grid-template-columns: minmax(0, 3fr) minmax(260px, 2fr);
+            }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 18px 18px 16px;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+        }
+
+        .card h2 {
+            margin: 0 0 8px;
+            font-size: 20px;
+        }
+
+        .card p {
+            margin: 0 0 10px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .sub-label {
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        .field-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .field-hint {
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 3px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px 10px;
+            font-size: 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
+            box-sizing: border-box;
+            background-color: #ffffff;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 1px rgba(0, 82, 204, 0.15);
+        }
+
+        button[type="button"].btn-primary {
+            width: 100%;
+            margin-top: 6px;
+            font-size: 14px;
+        }
+
+        #result {
+            margin-top: 14px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background-color: #f3f4ff;
+            border: 1px solid #d1d5ff;
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        #result h2 {
+            margin-top: 0;
+            margin-bottom: 6px;
+            font-size: 16px;
+        }
+
+        .result-highlight {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .result-note {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 6px;
+        }
+
+        .sidebar-card h3 {
+            margin-top: 0;
+            margin-bottom: 6px;
+            font-size: 16px;
+        }
+
+        .sidebar-card p {
+            margin-bottom: 8px;
+        }
+
+        .sidebar-list {
+            margin: 6px 0 0;
+            padding-left: 18px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .sidebar-list li {
+            margin-bottom: 3px;
+        }
+
+        .sidebar-footer {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .sidebar-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .sidebar-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .helper-text {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 8px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Net Revenue Retention Calculator</h1>
-    <p>Calculate the percentage of revenue retained from existing customers after accounting for expansions and churn using our Net Revenue Retention Calculator. Input your starting revenue, expansion revenue, and churned revenue to calculate your Net Revenue Retention Rate.</p>
-    <form>
-        <label for="startingRevenue">Starting Revenue ($): (ex. 10,000)</label>
-        <input type="number" id="startingRevenue" placeholder="Enter starting revenue" required><br>
-        <label for="expansionRevenue">Expansion Revenue ($): (2,000)</label>
-        <input type="number" id="expansionRevenue" placeholder="Enter expansion revenue" required><br>
-        <label for="churnedRevenue">Churned Revenue ($): (ex. 1,500)</label>
-        <input type="number" id="churnedRevenue" placeholder="Enter churned revenue" required><br>
-        <button type="button" onclick="calculate()">Calculate</button>
-    </form>
-    <div id="result"></div>
-</div>
+<header>
+    <div class="header-inner">
+        <div class="header-top-row">
+            <div class="brand-badge">The Customer Success Café · TheCScafe.com</div>
+            <nav class="breadcrumb">
+                <a href="./">&larr; All CS & SaaS calculators</a>
+            </nav>
+        </div>
+        <h1>Net Revenue Retention (NRR) Calculator</h1>
+        <p>
+            Use this NRR calculator to see how well you keep and grow recurring revenue in your existing base, separate the story from new sales and explain the real health of your SaaS business.
+        </p>
+        <div class="header-cta-group">
+            <a class="btn-primary" href="https://www.thecscafe.com" target="_blank" rel="noopener noreferrer">
+                Join 4,300+ CS pros · Weekly NRR playbooks
+            </a>
+            <a class="btn-ghost" href="#nrr-form">
+                Go to calculator
+            </a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="layout">
+        <!-- Main NRR card -->
+        <section class="card" id="nrr-form" aria-labelledby="nrr-heading">
+            <h2 id="nrr-heading">Calculate your Net Revenue Retention</h2>
+            <p>
+                Add your starting recurring revenue for a period, plus expansion and churn from that same customer base. The result shows your Net Revenue Retention rate as a percentage.
+            </p>
+            <div class="sub-label">
+                Tip: Use revenue from existing customers only. New logos belong in your total ARR, not in NRR.
+            </div>
+
+            <!-- Existing form & IDs preserved so calculation logic stays intact -->
+            <form onsubmit="return false;">
+                <div class="field-group">
+                    <label for="startingRevenue">Starting revenue</label>
+                    <div class="field-hint">
+                        Recurring revenue at the start of the period from your existing customer base, before any expansion or churn.
+                    </div>
+                    <input type="number" id="startingRevenue" placeholder="Example: 10000" min="0" required>
+                </div>
+
+                <div class="field-group">
+                    <label for="expansionRevenue">Expansion revenue</label>
+                    <div class="field-hint">
+                        Upgrades, seat growth, feature add-ons and price increases from that same base in the period.
+                    </div>
+                    <input type="number" id="expansionRevenue" placeholder="Example: 2000" min="0" required>
+                </div>
+
+                <div class="field-group">
+                    <label for="churnedRevenue">Churned or downsell revenue</label>
+                    <div class="field-hint">
+                        Revenue lost from cancellations and downgrades in the period for those starting customers.
+                    </div>
+                    <input type="number" id="churnedRevenue" placeholder="Example: 1500" min="0" required>
+                </div>
+
+                <button type="button" class="btn-primary" onclick="calculate()">
+                    Calculate NRR
+                </button>
+            </form>
+
+            <div class="helper-text">
+                Many investors and boards treat NRR as the core quality score of a SaaS business. Strong CS work shows up here long before it shows up in a case study.
+            </div>
+
+            <div id="result" aria-live="polite"></div>
+        </section>
+
+        <!-- Sidebar card -->
+        <aside class="card sidebar-card" aria-label="Customer Success Café newsletter">
+            <h3>Turn NRR into a stronger story</h3>
+            <p>
+                This calculator gives you the percentage. The newsletter helps you fix the levers behind it and talk about NRR in a way leadership cares about.
+            </p>
+            <ul class="sidebar-list">
+                <li>Break NRR into clear drivers CS can own</li>
+                <li>Design playbooks for expansion instead of random upsell luck</li>
+                <li>Frame churn patterns so you can argue for product or pricing changes</li>
+            </ul>
+            <div style="margin-top:10px;">
+                <a class="btn-primary" href="https://www.thecscafe.com" target="_blank" rel="noopener noreferrer">
+                    Get the CS Café newsletter
+                </a>
+            </div>
+            <div class="sidebar-footer">
+                Built for CS leaders who want to grow NRR, protect revenue and move their work closer to the boardroom.
+            </div>
+        </aside>
+    </div>
+</main>
 
 <script>
+    // Original calculation logic preserved
     function calculate() {
         var startingRevenue = parseFloat(document.getElementById('startingRevenue').value);
         var expansionRevenue = parseFloat(document.getElementById('expansionRevenue').value);
@@ -67,8 +387,11 @@
 
         var netRevenueRetention = ((startingRevenue + expansionRevenue - churnedRevenue) / startingRevenue) * 100;
 
-        document.getElementById('result').innerHTML = "<h2>Result</h2>" +
-            "<p>Net Revenue Retention Rate: " + netRevenueRetention.toFixed(2) + "%</p>";
+        document.getElementById('result').innerHTML =
+            "<h2>Result</h2>" +
+            "<p>Net Revenue Retention Rate:</p>" +
+            "<p class='result-highlight'>" + netRevenueRetention.toFixed(2) + "%</p>" +
+            "<p class='result-note'>Next step: break this number into segments and cohorts. A single NRR score can hide strong and weak pockets in your base, which is where your next CS playbook should focus.</p>";
     }
 </script>
 
