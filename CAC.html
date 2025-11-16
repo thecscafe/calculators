@@ -3,65 +3,381 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Acquisition Cost (CAC) Calculator - Calculate Your CAC</title>
-    <meta name="description" content="Use our Customer Acquisition Cost (CAC) Calculator to determine the average cost your business incurs to acquire a new customer. Input your marketing, sales, and other relevant expenses to calculate your CAC.">
-    <meta name="keywords" content="customer acquisition cost calculator, cac calculator, calculate cac, marketing expenses, sales expenses, business expenses">
+    <title>CAC Calculator | Customer Acquisition Cost For SaaS & CS Leaders</title>
+    <meta name="description" content="Free Customer Acquisition Cost (CAC) calculator for SaaS and Customer Success leaders. Measure true acquisition cost, compare against LTV and support better headcount and budget decisions. Built by The Customer Success Café.">
+    <meta name="keywords" content="CAC calculator, customer acquisition cost calculator, SaaS CAC, CS calculator, customer success metrics, The Customer Success Café, TheCScafe.com">
+    <link rel="canonical" href="https://thecscafe.github.io/calculators/CAC.html">
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
+        :root {
+            --primary: #0052cc;
+            --primary-dark: #003c99;
+            --accent: #ffb74d;
+            --bg: #f5f7fb;
+            --text: #1f2933;
+            --muted: #6b7280;
+            --card-bg: #ffffff;
+            --border-subtle: #e5e7eb;
         }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        input[type="number"] {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0;
+
+        * {
             box-sizing: border-box;
         }
-        button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
         }
-        button:hover {
-            background-color: #45a049;
+
+        header {
+            background: linear-gradient(135deg, #001f4d, #003c99);
+            color: #fff;
+            padding: 22px 16px 26px;
+        }
+
+        .header-inner {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .brand-badge {
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #cbd5ff;
+        }
+
+        .header-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .breadcrumb {
+            font-size: 13px;
+        }
+
+        .breadcrumb a {
+            color: #cbd5ff;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        header h1 {
+            margin: 4px 0 8px;
+            font-size: 26px;
+            line-height: 1.2;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 14px;
+            max-width: 620px;
+            color: #e5e7ff;
+        }
+
+        .header-cta-group {
+            margin-top: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-primary,
+        .btn-ghost {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s, color 0.2s, transform 0.1s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #1b2735;
+        }
+
+        .btn-primary:hover {
+            background-color: #ffa726;
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            background-color: transparent;
+            color: #e5e7ff;
+            border: 1px solid rgba(229, 231, 255, 0.5);
+        }
+
+        .btn-ghost:hover {
+            background-color: rgba(15, 23, 42, 0.45);
+            transform: translateY(-1px);
+        }
+
+        main {
+            max-width: 960px;
+            margin: 22px auto 36px;
+            padding: 0 16px;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr);
+            gap: 18px;
+        }
+
+        @media (min-width: 880px) {
+            .layout {
+                grid-template-columns: minmax(0, 3fr) minmax(260px, 2fr);
+            }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 18px 18px 16px;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+        }
+
+        .card h2 {
+            margin: 0 0 8px;
+            font-size: 20px;
+        }
+
+        .card p {
+            margin: 0 0 10px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .sub-label {
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        .field-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .field-hint {
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 3px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px 10px;
+            font-size: 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
+            box-sizing: border-box;
+            background-color: #ffffff;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 1px rgba(0, 82, 204, 0.15);
+        }
+
+        button[type="button"].btn-primary {
+            width: 100%;
+            margin-top: 6px;
+            font-size: 14px;
+        }
+
+        #result {
+            margin-top: 14px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background-color: #f3f4ff;
+            border: 1px solid #d1d5ff;
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        #result h2 {
+            margin-top: 0;
+            margin-bottom: 6px;
+            font-size: 16px;
+        }
+
+        .result-highlight {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .result-note {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 6px;
+        }
+
+        .sidebar-card h3 {
+            margin-top: 0;
+            margin-bottom: 6px;
+            font-size: 16px;
+        }
+
+        .sidebar-card p {
+            margin-bottom: 8px;
+        }
+
+        .sidebar-list {
+            margin: 6px 0 0;
+            padding-left: 18px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .sidebar-list li {
+            margin-bottom: 3px;
+        }
+
+        .sidebar-footer {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .sidebar-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .sidebar-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .helper-text {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 8px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Customer Acquisition Cost (CAC) Calculator</h1>
-    <p>Calculate the average cost your business incurs to acquire a new customer. Input your marketing, sales, and other relevant expenses to determine your Customer Acquisition Cost (CAC).</p>
-    <form>
-        <label for="marketingExpense">Marketing Expenses: (ex. $5000)</label>
-        <input type="number" id="marketingExpense" placeholder="Enter marketing expenses" required><br>
-        <label for="salesExpense">Sales Expenses: (ex. $3000)</label>
-        <input type="number" id="salesExpense" placeholder="Enter sales expenses" required><br>
-        <label for="otherExpense">Other Expenses: (ex. $2000)</label>
-        <input type="number" id="otherExpense" placeholder="Enter other relevant expenses" required><br>
-        <label for="customerCount">Number of New Customers Acquired: (ex. 100)</label>
-        <input type="number" id="customerCount" placeholder="Enter number of new customers" required><br>
-        <button type="button" onclick="calculateCAC()">Calculate CAC</button>
-    </form>
-    <div id="result"></div>
-</div>
+<header>
+    <div class="header-inner">
+        <div class="header-top-row">
+            <div class="brand-badge">The Customer Success Café · TheCScafe.com</div>
+            <nav class="breadcrumb">
+                <a href="./">&larr; All CS & SaaS calculators</a>
+            </nav>
+        </div>
+        <h1>Customer Acquisition Cost (CAC) Calculator</h1>
+        <p>
+            Use this CAC calculator to see what you really spend to win each new customer so you can argue for smarter post-sales investment and better quality growth.
+        </p>
+        <div class="header-cta-group">
+            <a class="btn-primary" href="https://www.thecscafe.com" target="_blank" rel="noopener noreferrer">
+                Join 4,300+ CS pros · Weekly NRR playbooks
+            </a>
+            <a class="btn-ghost" href="#cac-form">
+                Go to calculator
+            </a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="layout">
+        <!-- Main CAC card -->
+        <section class="card" id="cac-form" aria-labelledby="cac-heading">
+            <h2 id="cac-heading">Calculate your CAC</h2>
+            <p>
+                Add your total acquisition spend for a given period and the number of new customers you won in that same period. The result shows your average Customer Acquisition Cost per new customer.
+            </p>
+            <div class="sub-label">Tip: Use one full quarter of data so the number is stable enough for planning.</div>
+
+            <!-- Existing form & IDs preserved so calculation logic stays intact -->
+            <form onsubmit="return false;">
+                <div class="field-group">
+                    <label for="marketingExpense">Marketing expenses</label>
+                    <div class="field-hint">Paid ads, content, events, agencies and other marketing costs for the period.</div>
+                    <input type="number" id="marketingExpense" placeholder="Example: 5000" min="0" required>
+                </div>
+
+                <div class="field-group">
+                    <label for="salesExpense">Sales expenses</label>
+                    <div class="field-hint">Salaries, commissions and sales tools allocated to new logo acquisition.</div>
+                    <input type="number" id="salesExpense" placeholder="Example: 3000" min="0" required>
+                </div>
+
+                <div class="field-group">
+                    <label for="otherExpense">Other acquisition expenses</label>
+                    <div class="field-hint">Any other spend tied directly to landing new customers.</div>
+                    <input type="number" id="otherExpense" placeholder="Example: 2000" min="0" required>
+                </div>
+
+                <div class="field-group">
+                    <label for="customerCount">Number of new customers acquired</label>
+                    <div class="field-hint">New paying customers in the same period as the spend above.</div>
+                    <input type="number" id="customerCount" placeholder="Example: 100" min="1" required>
+                </div>
+
+                <button type="button" class="btn-primary" onclick="calculateCAC()">
+                    Calculate CAC
+                </button>
+            </form>
+
+            <div class="helper-text">
+                After you get your CAC, compare it with your LTV and payback period. If CAC is high relative to lifetime value, your growth may look good on paper but crush margin and CS investments.
+            </div>
+
+            <div id="result" aria-live="polite"></div>
+        </section>
+
+        <!-- Sidebar card -->
+        <aside class="card sidebar-card" aria-label="Customer Success Café newsletter">
+            <h3>Turn CAC into better CS decisions</h3>
+            <p>
+                This calculator gives you the number. The newsletter shows you how to use it in real CS work and leadership conversations.
+            </p>
+            <ul class="sidebar-list">
+                <li>Frame CAC vs LTV in a way your CFO respects</li>
+                <li>Argue for post-sale hiring using real payback math</li>
+                <li>Prioritize accounts where high CAC demands strong retention</li>
+            </ul>
+            <div style="margin-top:10px;">
+                <a class="btn-primary" href="https://www.thecscafe.com" target="_blank" rel="noopener noreferrer">
+                    Get the CS Café newsletter
+                </a>
+            </div>
+            <div class="sidebar-footer">
+                Built for CS leaders who want to protect revenue, grow NRR and move their career toward VP, not “busy CSM”.
+            </div>
+        </aside>
+    </div>
+</main>
 
 <script>
+    // Original calculation logic preserved
     function calculateCAC() {
         var marketingExpense = parseFloat(document.getElementById('marketingExpense').value);
         var salesExpense = parseFloat(document.getElementById('salesExpense').value);
@@ -71,8 +387,11 @@
         var totalExpense = marketingExpense + salesExpense + otherExpense;
         var cac = totalExpense / customerCount;
 
-        document.getElementById('result').innerHTML = "<h2>Result</h2>" +
-            "<p>The average Customer Acquisition Cost (CAC) is: $" + cac.toFixed(2) + "</p>";
+        document.getElementById('result').innerHTML =
+            "<h2>Result</h2>" +
+            "<p>The average Customer Acquisition Cost (CAC) is:</p>" +
+            "<p class='result-highlight'>$" + cac.toFixed(2) + " per new customer</p>" +
+            "<p class='result-note'>Next step: Compare this CAC with your average customer Lifetime Value (LTV) and payback period. If CAC is close to or higher than LTV, you are paying too much to win revenue you cannot keep.</p>";
     }
 </script>
 
