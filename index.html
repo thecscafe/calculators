@@ -3,124 +3,468 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Calculator Suite - Empower Your Decisions</title>
-    <meta name="description" content="Welcome to the Business Calculator Suite, where data-driven insights empower your business decisions. Choose from our suite of powerful calculators including Customer Acquisition Cost, Lifetime Value, and Net Revenue Retention.">
-    <meta name="keywords" content="business calculator suite, customer acquisition cost calculator, lifetime value calculator, net revenue retention calculator, business metrics, data-driven insights">
+    <title>Customer Success & SaaS Calculators | NRR, LTV, CAC & CSM Capacity Tools</title>
+    <meta name="description" content="Free Customer Success and SaaS calculators for NRR, LTV, CAC, CSM workload, tech-touch ROI and more. Built by The Customer Success Café to help CS leaders protect revenue, grow NRR and run smarter teams.">
+    <meta name="keywords" content="customer success calculators, SaaS calculators, NRR calculator, net revenue retention, CAC calculator, customer acquisition cost, LTV calculator, lifetime value, CSM workload calculator, SaaS metrics, revenue retention, The Customer Success Café, TheCScafe.com">
+    <link rel="canonical" href="https://thecscafe.github.io/calculators/">
     <style>
+        :root {
+            --primary: #0052cc;
+            --primary-dark: #003c99;
+            --accent: #ffb74d;
+            --bg: #f5f7fb;
+            --text: #1f2933;
+            --muted: #6b7280;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            background-color: var(--bg);
+            color: var(--text);
         }
+
         header {
-            background-color: #007bff;
+            background: linear-gradient(135deg, #001f4d, #003c99);
             color: #fff;
-            padding: 20px;
-            text-align: center;
+            padding: 24px 16px 32px;
         }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 0 20px;
+
+        .header-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: flex-start;
         }
-        h1 {
-            font-size: 36px;
-            margin-top: 40px;
-            text-align: center;
+
+        .brand-badge {
+            font-size: 13px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #cbd5ff;
         }
-        p {
-            font-size: 18px;
+
+        header h1 {
+            margin: 4px 0 8px;
+            font-size: 28px;
+            line-height: 1.2;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 15px;
+            max-width: 620px;
+            color: #e5e7ff;
+        }
+
+        .header-cta-group {
+            margin-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-primary,
+        .btn-ghost {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s, color 0.2s, transform 0.1s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #1b2735;
+        }
+
+        .btn-primary:hover {
+            background-color: #ffa726;
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            background-color: transparent;
+            color: #e5e7ff;
+            border: 1px solid rgba(229, 231, 255, 0.5);
+        }
+
+        .btn-ghost:hover {
+            background-color: rgba(15, 23, 42, 0.45);
+            transform: translateY(-1px);
+        }
+
+        main {
+            max-width: 960px;
+            margin: 24px auto 40px;
+            padding: 0 16px;
+        }
+
+        .intro {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px 20px 18px;
             margin-bottom: 20px;
-            text-align: center;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.07);
         }
-        ul {
+
+        .intro h2 {
+            margin-top: 0;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .intro p {
+            margin: 0 0 8px;
+            font-size: 15px;
+            color: var(--muted);
+        }
+
+        .intro strong {
+            color: var(--text);
+        }
+
+        .intro-list {
+            margin: 10px 0 0;
+            padding-left: 18px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .newsletter-banner {
+            background-color: #0f172a;
+            color: #f9fafb;
+            border-radius: 12px;
+            padding: 18px 18px 16px;
+            margin-bottom: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .newsletter-banner h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .newsletter-banner p {
+            margin: 0;
+            font-size: 14px;
+            color: #e5e7eb;
+        }
+
+        .newsletter-points {
+            margin: 8px 0 0;
+            padding-left: 18px;
+            font-size: 13px;
+            color: #cbd5f5;
+        }
+
+        .newsletter-cta {
+            margin-top: 10px;
+        }
+
+        .calculator-list {
             list-style-type: none;
             padding: 0;
-            text-align: center;
+            margin: 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
         }
-        li {
-            margin-bottom: 30px; /* Increased margin for better readability */
+
+        @media (min-width: 720px) {
+            .calculator-list {
+                grid-template-columns: 1fr 1fr;
+            }
         }
-        li a {
-            display: block;
-            padding: 10px 20px;
-            background-color: #007bff;
+
+        .calculator-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 16px 16px 14px;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .calculator-card h3 {
+            margin-top: 0;
+            margin-bottom: 6px;
+            font-size: 17px;
+        }
+
+        .calculator-tagline {
+            margin: 0 0 10px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .calculator-description {
+            margin: 0 0 12px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .calculator-link {
+            margin-top: auto;
+        }
+
+        .calculator-link a {
+            display: inline-block;
+            padding: 8px 14px;
+            background-color: var(--primary);
             color: #fff;
             text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: background-color 0.2s, transform 0.1s;
         }
-        li a:hover {
-            background-color: #0056b3;
+
+        .calculator-link a:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
         }
-        .link-description {
-            font-size: 16px; /* Increased font size for better visibility */
-            margin-bottom: 10px;
-            text-align: center;
+
+        .secondary-text {
+            text-align: left;
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 18px;
+        }
+
+        footer {
+            border-top: 1px solid #e5e7eb;
+            padding: 18px 16px 26px;
+            background-color: #ffffff;
+        }
+
+        .footer-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .footer-inner a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .footer-inner a:hover {
+            text-decoration: underline;
         }
     </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Customer Success & SaaS Calculators",
+      "description": "Free calculators for Customer Success and SaaS leaders, including NRR, LTV, CAC, CSM workload and tech-touch ROI. Built by The Customer Success Café.",
+      "url": "https://thecscafe.github.io/calculators/",
+      "publisher": {
+        "@type": "Organization",
+        "name": "The Customer Success Café",
+        "url": "https://www.thecscafe.com"
+      }
+    }
+    </script>
 </head>
 <body>
     <header>
-        <h1>Welcome to Business Calculator Suite</h1>
-        <p>Empowering your business decisions with data-driven insights</p>
+        <div class="header-inner">
+            <div class="brand-badge">The Customer Success Café · TheCScafe.com</div>
+            <h1>Customer Success & SaaS Metrics Calculators</h1>
+            <p>
+                Free tools for CS leaders and SaaS operators who care about one thing: growing and protecting recurring revenue while building a serious career.
+            </p>
+            <div class="header-cta-group">
+                <a class="btn-primary" href="https://www.thecscafe.com" target="_blank" rel="noopener noreferrer">
+                    Join 4,300+ CS Pros · Weekly NRR Playbooks
+                </a>
+                <a class="btn-ghost" href="#calculators">
+                    Use the calculators first
+                </a>
+            </div>
+        </div>
     </header>
-    <div class="container">
-        <h2>Our Calculators</h2>
-        <p>Choose from our suite of powerful calculators to optimize your business strategies:</p>
-        <ul>
-            <li>
-                <div class="link-description">
-                    <h3>Customer Acquisition Cost Calculator</h3>
-                    <p>Understand the true cost of acquiring new customers and optimize your marketing strategies. Our calculator helps you analyze and quantify the expenses associated with acquiring each new customer, including marketing and sales costs. Make more informed decisions about resource allocation and customer acquisition strategies by calculating your Customer Acquisition Cost (CAC).</p>
-                </div>
-                <a href="CAC.html">Calculate CAC</a>
-            </li>
-            <li>
-                <div class="link-description">
-                    <h3>Lifetime Value Calculator</h3>
-                    <p>Calculate the projected revenue a customer will generate over their lifetime with your business. Our Lifetime Value Calculator enables you to estimate the long-term value of each customer by considering factors such as average revenue per customer and average customer lifespan. You can focus on maximizing customer satisfaction and retention to drive sustainable growth by understanding the Lifetime Value (LTV) of your customers.</p>
-                </div>
-                <a href="LTV.html">Calculate LTV</a>
-            </li>
-            <li>
-                <div class="link-description">
-                    <h3>Net Revenue Retention Calculator</h3>
-                    <p>Measure the growth of your recurring revenue and identify opportunities for improvement. Our Net Revenue Retention Calculator helps you assess the effectiveness of your customer retention efforts by analyzing changes in your recurring revenue over time. It helps you calculate your Net Revenue Retention (NRR) rate, so you can identify areas for improvement and develop strategies to increase customer loyalty and revenue retention.</p>
-                </div>
-                <a href="NRR.html">Calculate NRR</a>
-            </li>
-            <li>
-                <div class="link-description">
-                    <h3>Revenue Physics Calculator</h3>
-                    <p>Apply the principles of physics to your revenue growth modeling. Our Revenue Physics Calculator helps you analyze the forces affecting your revenue streams, predict future growth patterns, and identify key acceleration factors. Understand the momentum of your business and calculate the energy needed to overcome revenue friction points.</p>
-                </div>
-                <a href="Revenue_Physics_Calculator.html">Calculate Revenue Physics</a>
-            </li>
-            <li>
-                <div class="link-description">
-                    <h3>Tech-Touch ROI Calculator</h3>
-                    <p>Evaluate the return on investment of your technology-enabled customer touchpoints. Our Tech-Touch ROI Calculator helps you quantify the value of digital engagement strategies, automated communications, and self-service portals. Make data-driven decisions about which tech-touch investments deliver the greatest business impact and customer satisfaction.</p>
-                </div>
-                <a href="Tech-Touch-ROI-Calculator.html">Calculate Tech-Touch ROI</a>
-            </li>
-            <li>
-                <div class="link-description">
-                    <h3>5-Point Revenue Impact Scale</h3>
-                    <p>Measure the effectiveness of your revenue-generating initiatives across five critical dimensions. Our 5-Point Revenue Impact Scale helps you evaluate and score different strategies, identify high-impact opportunities, and prioritize revenue-driving activities. Gain a comprehensive understanding of which factors most significantly influence your revenue growth.</p>
-                </div>
-                <a href="5-Point-Revenue-Impact-Scale.html">Assess Revenue Impact</a>
-            </li>
-            <li>
-                <div class="link-description">
-                    <h3>CSM Workload Calculator</h3>
-                    <p>Optimize your Customer Success Manager team capacity and allocation. Our CSM Workload Calculator helps you determine appropriate customer-to-CSM ratios, balance workloads across your team, and identify when to hire additional resources. Ensure your customer success team is properly resourced to deliver exceptional service without burnout.</p>
-                </div>
-                <a href="CSM-Workload-Calculator.html">Calculate CSM Workload</a>
-            </li>
-        </ul>
-        <p>Start making informed decisions today!</p>
-    </div>
+
+    <main>
+        <section class="intro" aria-labelledby="intro-heading">
+            <h2 id="intro-heading">Numbers that match how CS leaders work</h2>
+            <p>
+                Every calculator on this page comes from real work with B2B SaaS teams. No theory, no vanity metrics. Just the numbers you need to make calls on headcount, strategy and revenue.
+            </p>
+            <p>
+                Use them to support board decks, QBRs, hiring plans and your own career decisions.
+            </p>
+            <ul class="intro-list">
+                <li>Spot NRR and churn problems before they show up in renewals</li>
+                <li>Model CSM workload and hiring needs with real ratios</li>
+                <li>Measure if tech-touch and automation are actually paying off</li>
+            </ul>
+        </section>
+
+        <section class="newsletter-banner" aria-labelledby="newsletter-heading">
+            <h2 id="newsletter-heading">Pair these tools with weekly CS playbooks</h2>
+            <p>
+                The Customer Success Café newsletter gives you the practical side of these numbers: call scripts, email templates and frameworks to grow NRR and your role.
+            </p>
+            <ul class="newsletter-points">
+                <li>NRR and expansion playbooks you can ship this week</li>
+                <li>Career systems to move from “good CSM” to strategic revenue leader</li>
+                <li>AI workflows for health scores, renewal risk and account plans</li>
+            </ul>
+            <div class="newsletter-cta">
+                <a class="btn-primary" href="https://www.thecscafe.com" target="_blank" rel="noopener noreferrer">
+                    Get the newsletter · Free + premium playbooks
+                </a>
+            </div>
+        </section>
+
+        <section id="calculators" aria-labelledby="calculators-heading">
+            <h2 id="calculators-heading" style="font-size:20px; margin-bottom:10px;">Calculator library</h2>
+            <p class="secondary-text">
+                Pick a calculator, plug in your numbers, then save the output for your next planning doc or leadership review.
+            </p>
+            <ul class="calculator-list">
+                <li>
+                    <article class="calculator-card">
+                        <div>
+                            <h3>Customer Acquisition Cost (CAC) Calculator</h3>
+                            <p class="calculator-tagline">See what you really spend to win each new customer.</p>
+                            <p class="calculator-description">
+                                Add your sales and marketing spend, then compare CAC against payback period and LTV. Useful for CS leaders who partner with Sales and Marketing on efficient growth and want to argue for better post-sale investment.
+                            </p>
+                        </div>
+                        <div class="calculator-link">
+                            <a href="CAC.html">Calculate CAC</a>
+                        </div>
+                    </article>
+                </li>
+
+                <li>
+                    <article class="calculator-card">
+                        <div>
+                            <h3>Lifetime Value (LTV) Calculator</h3>
+                            <p class="calculator-tagline">Measure long term revenue per account.</p>
+                            <p class="calculator-description">
+                                Estimate LTV using average revenue and retention patterns. Use it to show why keeping and growing customers through CS often beats net new logo spend and to connect your work directly to revenue quality.
+                            </p>
+                        </div>
+                        <div class="calculator-link">
+                            <a href="LTV.html">Calculate LTV</a>
+                        </div>
+                    </article>
+                </li>
+
+                <li>
+                    <article class="calculator-card">
+                        <div>
+                            <h3>Net Revenue Retention (NRR) Calculator</h3>
+                            <p class="calculator-tagline">Track how well you keep and grow existing revenue.</p>
+                            <p class="calculator-description">
+                                Input starting ARR, expansion, downsell and churn to see NRR in a few clicks. Great for CS teams that want to separate logo churn from revenue churn and explain what is really happening in the base.
+                            </p>
+                        </div>
+                        <div class="calculator-link">
+                            <a href="NRR.html">Calculate NRR</a>
+                        </div>
+                    </article>
+                </li>
+
+                <li>
+                    <article class="calculator-card">
+                        <div>
+                            <h3>Revenue Physics Calculator</h3>
+                            <p class="calculator-tagline">See which forces are pushing your ARR forward or slowing it down.</p>
+                            <p class="calculator-description">
+                                Model how new business, expansion, contraction and churn work together. Use this when you need to explain to leadership why NRR is stalling even though new sales look strong.
+                            </p>
+                        </div>
+                        <div class="calculator-link">
+                            <a href="Revenue_Physics_Calculator.html">Calculate Revenue Physics</a>
+                        </div>
+                    </article>
+                </li>
+
+                <li>
+                    <article class="calculator-card">
+                        <div>
+                            <h3>Tech-Touch ROI Calculator</h3>
+                            <p class="calculator-tagline">Check if automation is creating real revenue, not just busy work.</p>
+                            <p class="calculator-description">
+                                Compare the cost of tech-touch programs with the expansion, retention and ticket reduction they drive. Helpful when you argue for CS tooling, in-app guidance or AI programs that scale outcomes without bloating headcount.
+                            </p>
+                        </div>
+                        <div class="calculator-link">
+                            <a href="Tech-Touch-ROI-Calculator.html">Calculate Tech-Touch ROI</a>
+                        </div>
+                    </article>
+                </li>
+
+                <li>
+                    <article class="calculator-card">
+                        <div>
+                            <h3>5-Point Revenue Impact Scale</h3>
+                            <p class="calculator-tagline">Score where each initiative really sits on the revenue ladder.</p>
+                            <p class="calculator-description">
+                                Rank projects across impact, speed, confidence, effort and risk. Use it with your leadership team to stop chasing low value ideas and focus on a short list that actually moves NRR and GRR.
+                            </p>
+                        </div>
+                        <div class="calculator-link">
+                            <a href="5-Point-Revenue-Impact-Scale.html">Assess Revenue Impact</a>
+                        </div>
+                    </article>
+                </li>
+
+                <li>
+                    <article class="calculator-card">
+                        <div>
+                            <h3>CSM Workload & Capacity Calculator</h3>
+                            <p class="calculator-tagline">Get real about ratios before your team burns out.</p>
+                            <p class="calculator-description">
+                                Map accounts, revenue bands and required activities per segment to see realistic CSM capacity. Use it in headcount requests to show why you need more people or sharper segmentation, not just hero work.
+                            </p>
+                        </div>
+                        <div class="calculator-link">
+                            <a href="CSM-Workload-Calculator.html">Calculate CSM Workload</a>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+        </section>
+
+        <p class="secondary-text">
+            If you use any of these calculators for a board deck or a big internal presentation, you will get more value by pairing them with narrative and playbooks. That is exactly what the newsletter covers each week at <a href="https://www.thecscafe.com" target="_blank" rel="noopener noreferrer">TheCScafe.com</a>.
+        </p>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <p>
+                The Customer Success Café helps CS leaders grow NRR, protect revenue, and accelerate their careers with systems, not slogans. 
+                Explore more resources and playbooks at <a href="https://www.thecscafe.com" target="_blank" rel="noopener noreferrer">TheCScafe.com</a>.
+            </p>
+            <p>
+                Built for Customer Success, RevOps, and SaaS leaders who want clear numbers, strong decisions, and careers that keep moving forward.
+            </p>
+        </div>
+    </footer>
 </body>
 </html>
