@@ -3,299 +3,634 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSM Workload Calculator</title>
+    <title>CSM Workload Calculator | Account Capacity & Coverage</title>
+    <meta name="description" content="Free CSM Workload Calculator for Customer Success leaders. Model how many accounts a CSM can realistically own based on complexity, activities and capacity. Built by Hakan Ozturk, Founder of The Customer Success Café Newsletter.">
+    <meta name="keywords" content="CSM workload calculator, customer success capacity, accounts per CSM, CS coverage model, The Customer Success Café, TheCScafe.com">
+    <link rel="canonical" href="https://thecscafe.github.io/calculators/CSM-Workload-Calculator.html">
+
     <style>
+        :root {
+            --primary: #0052cc;
+            --primary-dark: #003c99;
+            --accent: #ffb74d;
+            --bg: #f5f7fb;
+            --text: #1f2933;
+            --muted: #6b7280;
+            --card-bg: #ffffff;
+            --border-subtle: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f5f7fa;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            line-height: 1.5;
+            color: var(--text);
+            background-color: var(--bg);
             margin: 0;
             padding: 0;
         }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            margin-top: 20px;
-            margin-bottom: 20px;
+
+        header {
+            background: linear-gradient(135deg, #001f4d, #003c99);
+            color: #fff;
+            padding: 22px 16px 26px;
         }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
+
+        .header-inner {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .brand-badge {
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #cbd5ff;
+        }
+
+        .header-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
             margin-bottom: 10px;
         }
+
+        .breadcrumb {
+            font-size: 13px;
+        }
+
+        .breadcrumb a {
+            color: #cbd5ff;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        header h1 {
+            color: #ffffff;
+            font-size: 26px;
+            margin: 4px 0 8px;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 14px;
+            max-width: 640px;
+            color: #e5e7ff;
+        }
+
+        .header-cta-group {
+            margin-top: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-primary,
+        .btn-ghost {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s, color 0.2s, transform 0.1s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #1b2735;
+        }
+
+        .btn-primary:hover {
+            background-color: #ffa726;
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            background-color: transparent;
+            color: #e5e7ff;
+            border: 1px solid rgba(229, 231, 255, 0.5);
+        }
+
+        .btn-ghost:hover {
+            background-color: rgba(15, 23, 42, 0.45);
+            transform: translateY(-1px);
+        }
+
+        main {
+            max-width: 1040px;
+            margin: 22px auto 36px;
+            padding: 0 16px;
+        }
+
+        .page-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr);
+            gap: 18px;
+        }
+
+        @media (min-width: 900px) {
+            .page-layout {
+                grid-template-columns: minmax(0, 3fr) minmax(260px, 2fr);
+            }
+        }
+
+        .container {
+            margin: 0;
+            padding: 18px 18px 16px;
+            background-color: var(--card-bg);
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+            border-radius: 12px;
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+
         .logo {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
+
         .logo img {
-            max-width: 200px;
+            max-width: 180px;
             height: auto;
         }
+
         .instructions {
-            background-color: #ecf0f1;
-            padding: 15px;
-            border-left: 4px solid #3498db;
-            margin-bottom: 20px;
+            background-color: #eef2ff;
+            padding: 12px 14px;
+            border-left: 4px solid var(--primary);
+            margin-bottom: 16px;
             border-radius: 4px;
+            font-size: 13px;
+            color: var(--muted);
         }
+
+        .instructions strong {
+            color: var(--text);
+        }
+
         .button {
             display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 9px 18px;
+            font-size: 14px;
             color: #fff;
-            background-color: #3498db;
+            background-color: var(--primary);
             border: none;
-            border-radius: 5px;
+            border-radius: 999px;
             text-decoration: none;
             cursor: pointer;
-            transition: background-color 0.3s;
-            margin: 5px;
+            transition: background-color 0.2s, transform 0.1s;
+            margin: 4px;
         }
+
         .button:hover {
-            background-color: #2980b9;
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
         }
+
         .results {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #edf7ff;
-            border: 1px solid #d4e6f1;
-            border-radius: 5px;
+            margin-top: 18px;
+            padding: 16px 16px 14px;
+            background-color: #f3f4ff;
+            border: 1px solid #d1d5ff;
+            border-radius: 10px;
             display: none;
         }
-        input[type="number"], select {
+
+        .results h2 {
+            margin-top: 0;
+            margin-bottom: 6px;
+        }
+
+        .results p {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .results strong {
+            color: var(--text);
+        }
+
+        input[type="number"],
+        select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 10px;
+            padding: 8px 10px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            margin-bottom: 8px;
             font-family: inherit;
-            font-size: 16px;
+            font-size: 14px;
+            background-color: #ffffff;
         }
+
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 1px rgba(0, 82, 204, 0.15);
+        }
+
         .form-section {
-            background-color: #f8f8f8;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            border: 1px solid #e0e0e0;
+            background-color: #f9fafb;
+            padding: 14px 14px 12px;
+            margin-bottom: 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
         }
+
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
+
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             font-weight: 500;
+            font-size: 13px;
         }
+
         .form-hint {
-            font-size: 0.85em;
-            color: #666;
-            margin-top: 3px;
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 2px;
         }
+
         .section-title {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
+
         .section-title h3 {
             margin: 0;
             color: #2c3e50;
+            font-size: 15px;
         }
+
         .section-number {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 30px;
-            height: 30px;
-            background-color: #3498db;
+            width: 26px;
+            height: 26px;
+            background-color: var(--primary);
             color: white;
             border-radius: 50%;
-            margin-right: 10px;
-            font-weight: bold;
+            margin-right: 8px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .results-list {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .results-list ul {
+            margin: 6px 0 0;
+            padding-left: 18px;
+        }
+
+        .results-list li {
+            margin-bottom: 4px;
+        }
+
+        .sidebar-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 16px 16px 14px;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+            font-size: 13px;
+        }
+
+        .sidebar-card h3 {
+            margin-top: 0;
+            margin-bottom: 6px;
+            font-size: 16px;
+        }
+
+        .sidebar-card p {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: var(--muted);
+        }
+
+        .sidebar-list {
+            margin: 6px 0 0;
+            padding-left: 18px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .sidebar-list li {
+            margin-bottom: 3px;
+        }
+
+        .sidebar-footer {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .sidebar-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .sidebar-footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            border-top: 1px solid #e5e7eb;
+            padding: 16px 16px 24px;
+            background-color: #ffffff;
+        }
+
+        .footer-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            font-size: 12px;
+            color: var(--muted);
         }
     </style>
 </head>
 <body>
-    <div class="container">
+<header>
+    <div class="header-inner">
+        <div class="header-top-row">
+            <div class="brand-badge">The Customer Success Café · TheCScafe.com</div>
+            <nav class="breadcrumb">
+                <a href="./">&larr; All CS & SaaS calculators</a>
+            </nav>
+        </div>
         <h1>CSM Workload Calculator</h1>
-        <div class="logo">
-            <!-- Replace with your actual logo URL -->
-            <img src="../assets/thecscafe.png" alt="The CS Cafe Logo">
-        </div>
-        
-        <div class="instructions">
-            <p><strong>The CSM Workload Calculator</strong> helps you determine the optimal number of accounts a Customer Success Manager can effectively handle based on various factors such as account complexity, product type, and required activities.</p>
-            <p>Fill in the details below to calculate your recommended CSM workload and compare it to industry benchmarks.</p>
-        </div>
-        
-        <div class="form-section">
-            <div class="section-title">
-                <div class="section-number">1</div>
-                <h3>Account Information</h3>
-            </div>
-            
-            <div class="form-group">
-                <label for="account_type">Account Type:</label>
-                <select id="account_type">
-                    <option value="enterprise">Enterprise</option>
-                    <option value="mid_market">Mid-Market</option>
-                    <option value="smb">SMB</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="avg_contract_value">Average Annual Contract Value ($):</label>
-                <input type="number" id="avg_contract_value" min="0" step="1000">
-            </div>
-            
-            <div class="form-group">
-                <label for="product_complexity">Product Complexity:</label>
-                <select id="product_complexity">
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                </select>
-            </div>
-        </div>
-        
-        <div class="form-section">
-            <div class="section-title">
-                <div class="section-number">2</div>
-                <h3>CSM Activities</h3>
-            </div>
-            
-            <div class="form-group">
-                <label for="onboarding_time">Average Onboarding Time (hours):</label>
-                <input type="number" id="onboarding_time" min="0" step="0.5">
-            </div>
-            
-            <div class="form-group">
-                <label for="qbr_frequency">Quarterly Business Review Frequency:</label>
-                <select id="qbr_frequency">
-                    <option value="monthly">Monthly</option>
-                    <option value="quarterly">Quarterly</option>
-                    <option value="biannually">Bi-annually</option>
-                    <option value="annually">Annually</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="support_time">Average Weekly Support Time per Account (hours):</label>
-                <input type="number" id="support_time" min="0" step="0.5">
-            </div>
-        </div>
-        
-        <div class="form-section">
-            <div class="section-title">
-                <div class="section-number">3</div>
-                <h3>CSM Work Schedule</h3>
-            </div>
-            
-            <div class="form-group">
-                <label for="work_hours">Weekly Work Hours:</label>
-                <input type="number" id="work_hours" min="20" max="60" value="40">
-            </div>
-            
-            <div class="form-group">
-                <label for="admin_time">Weekly Administrative Time (hours):</label>
-                <input type="number" id="admin_time" min="0" step="0.5">
-                <div class="form-hint">Time spent on internal meetings, reporting, etc.</div>
-            </div>
-        </div>
-        
-        <div style="text-align: center; margin: 20px 0;">
-            <button onclick="calculateWorkload()" class="button">Calculate CSM Workload</button>
-        </div>
-        
-        <div id="results" class="results">
-            <h2>CSM Workload Results</h2>
-            <div id="workload_result"></div>
-            <div id="benchmark_comparison"></div>
-            <div id="recommendations"></div>
+        <p>
+            Estimate how many accounts a CSM can realistically own based on complexity, touch pattern and actual hours available, instead of guessing or using a random benchmark.
+        </p>
+        <div class="header-cta-group">
+            <a class="btn-primary" href="https://www.thecscafe.com" target="_blank" rel="noopener noreferrer">
+                Join 4,300+ CS pros · Weekly NRR playbooks
+            </a>
+            <a class="btn-ghost" href="#csm-workload-tool">
+                Go to calculator
+            </a>
         </div>
     </div>
-    
-    <script>
-        function calculateWorkload() {
-            // Get input values
-            const accountType = document.getElementById('account_type').value;
-            const avgContractValue = parseFloat(document.getElementById('avg_contract_value').value);
-            const productComplexity = document.getElementById('product_complexity').value;
-            const onboardingTime = parseFloat(document.getElementById('onboarding_time').value);
-            const qbrFrequency = document.getElementById('qbr_frequency').value;
-            const supportTime = parseFloat(document.getElementById('support_time').value);
-            const workHours = parseFloat(document.getElementById('work_hours').value);
-            const adminTime = parseFloat(document.getElementById('admin_time').value);
-            
-            // Calculate available time for account management
-            const availableTime = workHours - adminTime;
-            
-            // Calculate time per account
-            let timePerAccount = supportTime;
-            if (qbrFrequency === 'monthly') timePerAccount += 2;
-            else if (qbrFrequency === 'quarterly') timePerAccount += 0.5;
-            else if (qbrFrequency === 'biannually') timePerAccount += 0.25;
-            else if (qbrFrequency === 'annually') timePerAccount += 0.125;
-            
-            // Add onboarding time (assuming 1 onboarding per quarter)
-            timePerAccount += onboardingTime / 13;
-            
-            // Calculate optimal number of accounts
-            let optimalAccounts = Math.floor(availableTime / timePerAccount);
-            
-            // Adjust based on account type and product complexity
-            if (accountType === 'enterprise') optimalAccounts *= 0.7;
-            else if (accountType === 'smb') optimalAccounts *= 1.3;
-            
-            if (productComplexity === 'high') optimalAccounts *= 0.8;
-            else if (productComplexity === 'low') optimalAccounts *= 1.2;
-            
-            optimalAccounts = Math.round(optimalAccounts);
-            
-            // Get benchmark range
-            let benchmarkLow, benchmarkHigh;
-            if (accountType === 'enterprise') {
-                benchmarkLow = 10;
-                benchmarkHigh = 30;
-            } else if (accountType === 'mid_market') {
-                benchmarkLow = 30;
-                benchmarkHigh = 80;
-            } else {
-                benchmarkLow = 100;
-                benchmarkHigh = 300;
-            }
-            
-            // Generate results
-            const resultDiv = document.getElementById('workload_result');
-            resultDiv.innerHTML = `<p>Based on your inputs, the optimal number of accounts per CSM is: <strong>${optimalAccounts}</strong></p>`;
-            
-            const benchmarkDiv = document.getElementById('benchmark_comparison');
-            benchmarkDiv.innerHTML = `<p>Industry benchmark for ${accountType} accounts: ${benchmarkLow} - ${benchmarkHigh}</p>`;
-            
-            const recommendationsDiv = document.getElementById('recommendations');
-            let recommendations = '<h3>Recommendations:</h3><ul>';
-            
-            if (optimalAccounts < benchmarkLow) {
-                recommendations += '<li>Consider increasing efficiency or reducing time spent on administrative tasks.</li>';
-                recommendations += '<li>Evaluate if product complexity can be reduced to allow for more accounts per CSM.</li>';
-            } else if (optimalAccounts > benchmarkHigh) {
-                recommendations += '<li>Your CSMs may be overloaded. Consider hiring additional CSMs or implementing more automation.</li>';
-                recommendations += '<li>Review your support processes to ensure quality is maintained with this high account load.</li>';
-            } else {
-                recommendations += '<li>Your calculated workload aligns well with industry benchmarks.</li>';
-                recommendations += '<li>Continue to monitor CSM satisfaction and customer health scores to ensure this workload remains optimal.</li>';
-            }
-            
-            recommendations += '</ul>';
-            recommendationsDiv.innerHTML = recommendations;
-            
-            // Show results
-            document.getElementById('results').style.display = 'block';
+</header>
+
+<main>
+    <div class="page-layout">
+        <!-- Main tool -->
+        <section class="container" id="csm-workload-tool">
+            <div class="logo">
+                <img src="thecscafe.png" alt="The CS Cafe Logo">
+            </div>
+
+            <div class="instructions">
+                <p><strong>What this does:</strong> This tool gives you a directional workload number so you can argue for realistic coverage: not just “X accounts per CSM” but a number tied to onboarding, QBRs, support time and admin overhead.</p>
+                <p><strong>Pro tip:</strong> Run it for each segment separately. Enterprise, mid-market, and SMB need different coverage and time budgets.</p>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">
+                    <div class="section-number">1</div>
+                    <h3>Account information</h3>
+                </div>
+
+                <div class="form-group">
+                    <label for="account_type">Account type</label>
+                    <select id="account_type">
+                        <option value="enterprise">Enterprise</option>
+                        <option value="mid_market">Mid-market</option>
+                        <option value="smb">SMB</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="avg_contract_value">Average annual contract value ($)</label>
+                    <input type="number" id="avg_contract_value" min="0" step="1000" placeholder="Example: 50000">
+                    <div class="form-hint">Optional, but helpful when you tell the story (coverage vs ARR per CSM).</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="product_complexity">Product complexity</label>
+                    <select id="product_complexity">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">
+                    <div class="section-number">2</div>
+                    <h3>CSM activities</h3>
+                </div>
+
+                <div class="form-group">
+                    <label for="onboarding_time">Average onboarding time per account (hours)</label>
+                    <input type="number" id="onboarding_time" min="0" step="0.5" placeholder="Example: 10">
+                    <div class="form-hint">Total hands-on time through go-live. The tool spreads this across a quarter.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="qbr_frequency">Business review frequency</label>
+                    <select id="qbr_frequency">
+                        <option value="monthly">Monthly</option>
+                        <option value="quarterly" selected>Quarterly</option>
+                        <option value="biannually">Bi-annually</option>
+                        <option value="annually">Annually</option>
+                    </select>
+                    <div class="form-hint">Includes prep plus meeting time per account.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="support_time">Average weekly support time per account (hours)</label>
+                    <input type="number" id="support_time" min="0" step="0.5" placeholder="Example: 1.5">
+                    <div class="form-hint">Customer emails, calls, ad-hoc working sessions that sit with the CSM.</div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">
+                    <div class="section-number">3</div>
+                    <h3>CSM work schedule</h3>
+                </div>
+
+                <div class="form-group">
+                    <label for="work_hours">Weekly work hours</label>
+                    <input type="number" id="work_hours" min="20" max="60" value="40">
+                    <div class="form-hint">You can reduce this if you want to assume fewer “effective” hours per week.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="admin_time">Weekly internal / admin time (hours)</label>
+                    <input type="number" id="admin_time" min="0" step="0.5" placeholder="Example: 10">
+                    <div class="form-hint">Internal meetings, reporting, tooling, side projects. This time is not available for accounts.</div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 16px 0 8px;">
+                <button onclick="calculateWorkload()" class="button">Calculate CSM workload</button>
+            </div>
+
+            <div id="results" class="results">
+                <h2>CSM workload results</h2>
+                <div id="workload_result"></div>
+                <div id="benchmark_comparison" style="margin-top:6px;"></div>
+                <div id="recommendations" class="results-list" style="margin-top:8px;"></div>
+            </div>
+        </section>
+
+        <!-- Sidebar -->
+        <aside class="sidebar-card" aria-label="Customer Success Café newsletter">
+            <h3>Turn this into a headcount case</h3>
+            <p>
+                This calculator gives you a number. The CS Café newsletter shows you how to turn that number into a credible ask for headcount, tooling or segmentation changes.
+            </p>
+            <ul class="sidebar-list">
+                <li>Capacity models that link accounts per CSM to NRR and churn risk</li>
+                <li>How to segment by ARR, risk, and motion instead of random tiers</li>
+                <li>Scripts for pushing back on “just give each CSM 100 accounts” logic</li>
+            </ul>
+            <div style="margin-top:10px;">
+                <a class="btn-primary" href="https://www.thecscafe.com" target="_blank" rel="noopener noreferrer">
+                    Get the CS Café newsletter
+                </a>
+            </div>
+            <div class="sidebar-footer">
+                Built for CS leaders who want to grow NRR, protect revenue and argue for realistic workloads with data, not emotion.
+            </div>
+        </aside>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-inner">
+        <p>
+            Part of The Customer Success Café calculator library · Helping CS teams design capacity models that protect both customers and CSMs.
+        </p>
+    </div>
+</footer>
+
+<script>
+    function calculateWorkload() {
+        // Get input values
+        const accountType = document.getElementById('account_type').value;
+        const avgContractValue = parseFloat(document.getElementById('avg_contract_value').value); // kept for story, not used in calc
+        const productComplexity = document.getElementById('product_complexity').value;
+        const onboardingTime = parseFloat(document.getElementById('onboarding_time').value);
+        const qbrFrequency = document.getElementById('qbr_frequency').value;
+        const supportTime = parseFloat(document.getElementById('support_time').value);
+        const workHours = parseFloat(document.getElementById('work_hours').value);
+        const adminTime = parseFloat(document.getElementById('admin_time').value);
+
+        // Basic validation so we do not divide by zero
+        if (isNaN(workHours) || isNaN(adminTime) || isNaN(supportTime) || isNaN(onboardingTime)) {
+            alert('Please fill in all numeric fields before calculating.');
+            return;
         }
-    </script>
+
+        // Calculate available time for account management
+        const availableTime = workHours - adminTime;
+
+        // Calculate time per account
+        let timePerAccount = supportTime;
+        if (qbrFrequency === 'monthly') timePerAccount += 2;
+        else if (qbrFrequency === 'quarterly') timePerAccount += 0.5;
+        else if (qbrFrequency === 'biannually') timePerAccount += 0.25;
+        else if (qbrFrequency === 'annually') timePerAccount += 0.125;
+
+        // Add onboarding time (assuming 1 onboarding per quarter)
+        timePerAccount += onboardingTime / 13;
+
+        if (timePerAccount <= 0 || availableTime <= 0) {
+            alert('Available time or time per account is zero or negative. Adjust your inputs and try again.');
+            return;
+        }
+
+        // Calculate optimal number of accounts
+        let optimalAccounts = Math.floor(availableTime / timePerAccount);
+
+        // Adjust based on account type and product complexity
+        if (accountType === 'enterprise') optimalAccounts *= 0.7;
+        else if (accountType === 'smb') optimalAccounts *= 1.3;
+
+        if (productComplexity === 'high') optimalAccounts *= 0.8;
+        else if (productComplexity === 'low') optimalAccounts *= 1.2;
+
+        optimalAccounts = Math.round(optimalAccounts);
+
+        // Get benchmark range
+        let benchmarkLow, benchmarkHigh;
+        if (accountType === 'enterprise') {
+            benchmarkLow = 10;
+            benchmarkHigh = 30;
+        } else if (accountType === 'mid_market') {
+            benchmarkLow = 30;
+            benchmarkHigh = 80;
+        } else {
+            benchmarkLow = 100;
+            benchmarkHigh = 300;
+        }
+
+        // Generate results
+        const resultDiv = document.getElementById('workload_result');
+        resultDiv.innerHTML =
+            '<p>Based on your inputs, a single CSM can realistically manage approximately <strong>' +
+            optimalAccounts +
+            '</strong> accounts in this segment.</p>';
+
+        const benchmarkDiv = document.getElementById('benchmark_comparison');
+        benchmarkDiv.innerHTML =
+            '<p>Industry benchmark for <strong>' +
+            (accountType === 'enterprise' ? 'enterprise' : accountType === 'mid_market' ? 'mid-market' : 'SMB') +
+            '</strong> accounts is roughly <strong>' +
+            benchmarkLow +
+            '–' +
+            benchmarkHigh +
+            '</strong> accounts per CSM.</p>';
+
+        const recommendationsDiv = document.getElementById('recommendations');
+        let recommendations = '<h3 style="margin:6px 0 4px; font-size:14px;">Recommendations</h3><ul>';
+
+        if (optimalAccounts < benchmarkLow) {
+            recommendations += '<li>Workload is below common benchmarks. This can be fine if accounts are complex or strategic, but you may be leaving coverage capacity on the table.</li>';
+            recommendations += '<li>Look at automation, pooled motions, or clearer playbooks to free up some time if you want to increase account count without burning people out.</li>';
+        } else if (optimalAccounts > benchmarkHigh) {
+            recommendations += '<li>Your CSMs may be overloaded compared to typical ranges. Expect slower responses, weaker adoption, and higher burnout if nothing changes.</li>';
+            recommendations += '<li>Use this model to argue for either more headcount, a lighter touch model for smaller accounts, or tighter boundaries around what CSMs own vs Support.</li>';
+        } else {
+            recommendations += '<li>Your calculated workload sits inside common benchmark ranges for this segment.</li>';
+            recommendations += '<li>Keep an eye on leading indicators: time-to-value, CSM burnout risk, and renewal conversations slipping. Those will tell you if the number is truly sustainable.</li>';
+        }
+
+        if (!isNaN(avgContractValue) && avgContractValue > 0 && optimalAccounts > 0) {
+            const arrPerCSM = avgContractValue * optimalAccounts;
+            recommendations += '<li>At roughly <strong>$' + arrPerCSM.toLocaleString() + '</strong> ARR per CSM, you can tie this model directly into NRR and capacity conversations with Finance and leadership.</li>';
+        }
+
+        recommendations += '</ul>';
+        recommendationsDiv.innerHTML = recommendations;
+
+        // Show results
+        document.getElementById('results').style.display = 'block';
+    }
+</script>
 </body>
 </html>
