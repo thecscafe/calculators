@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NRR Calculator | Net Revenue Retention For SaaS & CS Leaders</title>
-    <meta name="description" content="Free Net Revenue Retention (NRR) calculator for SaaS and Customer Success leaders. Measure how well you keep and grow revenue from existing customers so you can protect NRR and tell a clear story to leadership. Built by The Customer Success Café.">
+    <title>NRR Calculator | How To Calculate Net Revenue Retention</title>
+    <meta name="description" content="Free NRR calculator with the net revenue retention formula, a worked example, and NRR vs GRR explained. Measure how much revenue your existing customers keep and grow.">
     <meta name="keywords" content="NRR calculator, net revenue retention calculator, SaaS NRR, customer success metrics, revenue retention, The Customer Success Café, TheCScafe.com">
     <link rel="canonical" href="https://thecscafe.github.io/calculators/NRR.html">
 
@@ -279,6 +279,35 @@
             margin-top: 8px;
         }
     </style>
+    <meta property="og:title" content="NRR Calculator | How To Calculate Net Revenue Retention">
+    <meta property="og:description" content="Free NRR calculator with the net revenue retention formula, a worked example, and NRR vs GRR explained. Measure how much revenue your existing customers keep and grow.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thecscafe.github.io/calculators/NRR.html">
+<style id="csc-cta-css">
+.csc-topbar{background:#1d4ed8;color:#fff;font:600 14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;text-align:center;padding:9px 14px}
+.csc-topbar a{color:#fff;text-decoration:underline;text-underline-offset:3px;margin-left:6px;white-space:nowrap}
+.csc-cta,.csc-guide,.csc-more{box-sizing:border-box;max-width:900px;margin:28px auto;font:15px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;text-align:left}
+.csc-cta{padding:24px;border-radius:16px;background:#0f172a;color:#e5e7eb}
+.csc-cta h2{color:#fff;font-size:21px;line-height:1.3;margin:0 0 6px;text-align:left}
+.csc-cta p{margin:0 0 8px;color:#cbd5e1}
+.csc-cta ul{margin:10px 0 16px;padding-left:20px;color:#e5e7eb}
+.csc-cta li{margin:4px 0}
+.csc-btn{display:inline-block;background:#3b82f6;color:#fff!important;font-weight:700;padding:12px 20px;border-radius:999px;text-decoration:none}
+.csc-btn:hover{background:#2563eb}
+.csc-note{font-size:13px;color:#94a3b8;margin-top:12px}
+.csc-guide{padding:24px;border-radius:16px;background:#fff;color:#1f2937;border:1px solid #e5e7eb}
+.csc-guide h2{font-size:22px;color:#0f172a;margin:0 0 10px;text-align:left}
+.csc-guide h3{font-size:17px;color:#0f172a;margin:22px 0 6px}
+.csc-guide a{color:#1d4ed8}
+.csc-formula{background:#eef2ff;border-left:4px solid #1d4ed8;padding:12px 14px;border-radius:8px;font-weight:600;margin:12px 0;overflow-x:auto}
+.csc-guide details{border-top:1px solid #e5e7eb;padding:10px 0}
+.csc-guide summary{cursor:pointer;font-weight:600;color:#0f172a}
+.csc-more{padding:0 4px;font-size:14px;color:#475569}
+.csc-more a{color:#1d4ed8;margin-right:14px;display:inline-block}
+.csc-toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:9999;max-width:520px;width:calc(100% - 32px);background:#0f172a;color:#e5e7eb;padding:14px 16px;border-radius:14px;box-shadow:0 18px 40px rgba(15,23,42,.35);font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;display:flex;gap:12px;align-items:center}
+.csc-toast a{color:#fff;font-weight:700;white-space:nowrap;background:#3b82f6;padding:8px 12px;border-radius:999px;text-decoration:none}
+.csc-toast button{background:none;border:0;color:#94a3b8;font-size:18px;cursor:pointer;padding:0 4px}
+</style>
 </head>
 <body>
 
@@ -295,7 +324,7 @@
             Use this NRR calculator to see how well you keep and grow recurring revenue in your existing base, separate the story from new sales and explain the real health of your SaaS business.
         </p>
         <div class="header-cta-group">
-            <a class="btn-primary" href="https://www.thecscafe.com" target="_blank" rel="noopener noreferrer">
+            <a class="btn-primary" href="https://www.thecscafe.com/subscribe?utm_source=thecscafe_tools&utm_medium=referral&utm_campaign=nrr&utm_content=header" target="_blank" rel="noopener noreferrer">
                 Join 4,300+ CS pros · Weekly NRR playbooks
             </a>
             <a class="btn-ghost" href="#nrr-form">
@@ -367,7 +396,7 @@
                 <li>Frame churn patterns so you can argue for product or pricing changes</li>
             </ul>
             <div style="margin-top:10px;">
-                <a class="btn-primary" href="https://www.thecscafe.com" target="_blank" rel="noopener noreferrer">
+                <a class="btn-primary" href="https://www.thecscafe.com/subscribe?utm_source=thecscafe_tools&utm_medium=referral&utm_campaign=nrr&utm_content=sidebar" target="_blank" rel="noopener noreferrer">
                     Get the CS Café newsletter
                 </a>
             </div>
@@ -376,6 +405,22 @@
             </div>
         </aside>
     </div>
+
+<section class="csc-guide" aria-label="Guide">
+<h2>How To Calculate Net Revenue Retention (NRR)</h2>
+<p>Net Revenue Retention shows how much recurring revenue you kept and grew from the customers you already had at the start of a period. Revenue from new customers stays out of the number.</p>
+<div class="csc-formula">NRR = (Starting MRR + Expansion &minus; Contraction &minus; Churn) &divide; Starting MRR &times; 100</div>
+<h3>Worked Example</h3>
+<p>You start the quarter with $100,000 MRR from existing customers. They add $12,000 in upgrades, downgrade by $3,000, and $5,000 churns.</p>
+<p>(100,000 + 12,000 &minus; 3,000 &minus; 5,000) &divide; 100,000 = <strong>104% NRR</strong>. Your existing base grew 4% on its own.</p>
+<h3>What Is A Good NRR?</h3>
+<p>Above 100% means expansion from existing customers is larger than what you lose to churn and downgrades. Below 100% means the base shrinks unless new sales cover the gap. Companies selling to enterprises usually report higher NRR than those selling to small businesses, so compare yourself with companies in the same segment.</p>
+<h3>NRR vs GRR</h3>
+<p>Gross Revenue Retention (GRR) uses the same formula without expansion. GRR can never go above 100%, so it shows how well you hold on to revenue. NRR shows whether you also grow it. Report both: a high NRR with a weak GRR often means a few big upsells are hiding churn.</p>
+<h3>Frequently Asked Questions</h3><details><summary>Does NRR include new customers?</summary><p>No. NRR only measures the customers you had at the start of the period. Revenue from new customers goes into total ARR growth.</p></details><details><summary>How do you calculate annual NRR?</summary><p>Take the recurring revenue from your customers 12 months ago, then measure what those same customers pay today, including upgrades, downgrades and churn. Divide today&#x27;s figure by the starting figure and multiply by 100.</p></details><details><summary>Is net revenue retention the same as net recurring revenue?</summary><p>People sometimes mix the terms. Net recurring revenue usually means your total recurring revenue after churn, in dollars. Net revenue retention is a percentage that compares one group of customers over time.</p></details><details><summary>What is the difference between NRR and NDR?</summary><p>Net Dollar Retention (NDR) is another name for the same metric. Some companies say NDR, others say NRR.</p></details></section>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does NRR include new customers?", "acceptedAnswer": {"@type": "Answer", "text": "No. NRR only measures the customers you had at the start of the period. Revenue from new customers goes into total ARR growth."}}, {"@type": "Question", "name": "How do you calculate annual NRR?", "acceptedAnswer": {"@type": "Answer", "text": "Take the recurring revenue from your customers 12 months ago, then measure what those same customers pay today, including upgrades, downgrades and churn. Divide today's figure by the starting figure and multiply by 100."}}, {"@type": "Question", "name": "Is net revenue retention the same as net recurring revenue?", "acceptedAnswer": {"@type": "Answer", "text": "People sometimes mix the terms. Net recurring revenue usually means your total recurring revenue after churn, in dollars. Net revenue retention is a percentage that compares one group of customers over time."}}, {"@type": "Question", "name": "What is the difference between NRR and NDR?", "acceptedAnswer": {"@type": "Answer", "text": "Net Dollar Retention (NDR) is another name for the same metric. Some companies say NDR, others say NRR."}}]}</script>
+
+<nav class="csc-more" aria-label="More free CS tools"><strong>More free CS tools:</strong> <a href="/calculators/LTV.html">SaaS LTV Calculator</a><a href="/calculators/CSM-Workload-Calculator.html">CSM Workload Calculator</a><a href="/templates/Voice-of-Customer-Template.html">Voice of Customer Template</a><a href="/assessments/customer-impact-assessment.html">Customer Impact Assessment</a><a href="/calculators/">All CS Calculators</a></nav>
 </main>
 
 <script>
@@ -384,6 +429,13 @@
         var startingRevenue = parseFloat(document.getElementById('startingRevenue').value);
         var expansionRevenue = parseFloat(document.getElementById('expansionRevenue').value);
         var churnedRevenue = parseFloat(document.getElementById('churnedRevenue').value);
+
+        if (!(startingRevenue > 0)) {
+            document.getElementById('result').innerHTML = "<p class='result-note'>Enter a starting revenue above 0.</p>";
+            return;
+        }
+        expansionRevenue = expansionRevenue || 0;
+        churnedRevenue = churnedRevenue || 0;
 
         var netRevenueRetention = ((startingRevenue + expansionRevenue - churnedRevenue) / startingRevenue) * 100;
 
